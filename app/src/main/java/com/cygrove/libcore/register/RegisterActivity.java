@@ -98,7 +98,6 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
                 Manifest.permission.CAMERA,
                 Manifest.permission.WRITE_SETTINGS,
                 Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.ACCESS_WIFI_STATE,
                 Manifest.permission.CHANGE_WIFI_STATE};
         if (!EasyPermissions.hasPermissions(this, perms)) {
             EasyPermissions.requestPermissions(this, "为保证APP正常使用，请允许存储、相机等权限", 101, perms);
