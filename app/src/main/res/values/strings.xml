@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">libcore</string>
+    <string name="comminity_name">小区名称</string>
+    <string name="input_commit">請輸入備注信息</string>
+    <string name="username">賬&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;號</string>
+    <string name="please_input_username">请输入账号</string>
+    <string name="password">密&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;碼</string>
+    <string name="please_input_pwd">請輸入密碼</string>
+    <string name="login">登錄</string>
+</resources>
