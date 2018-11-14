@@ -47,7 +47,7 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
         requestBuilder.header("Proxy-Connection", "keep-alive");
         requestBuilder.header("Cache-Control", "max-age=0");
         requestBuilder.header("Content-Type", "application/json");
-        requestBuilder.header("Token", BaseApplication.getInstance().mEnv.appPreferencesHelper().getToken());
+        requestBuilder.header("Token", BaseApplication.getInstance().mEnv.appPreferencesHelper().getToken() + "");
         requestBuilder.header("clt", "android");
         requestBuilder.header("device", Build.MODEL);
         requestBuilder.header("appVersion", Build.VERSION.RELEASE);

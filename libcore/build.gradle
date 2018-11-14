@@ -34,6 +34,12 @@ android {
             }
         }
     }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+    lintOptions {
+        disable 'GoogleAppIndexingWarning'
+    }
 }
 
 allprojects {
@@ -119,6 +125,7 @@ dependencies {
     // 下拉刷新上拉更多
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.30"
+    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
     // apt
     annotationProcessor 'com.github.frankiesardo:auto-parcel-processor:0.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'

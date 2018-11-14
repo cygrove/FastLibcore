@@ -28,7 +28,7 @@ public class AppApplication extends BaseApplication {
         baseUrls.put("DOMAIN", "https://ywf.xsfapp.com");
         GlobalConfigModule.Builder configModuleBuilder = new GlobalConfigModule.Builder()
                 .globalHttpHandler(new GlobalHttpHandlerImpl())
-                .baseUrl("https://ywf.xsfapp1.com")
+                .baseUrl("https://ywf.xsfapp.com")
                 .baseUrls(baseUrls);
         mApplicationComponent = DaggerApplicationComponent
                 .builder()
