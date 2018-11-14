@@ -552,4 +552,11 @@
     <dimen name="px1000">333.3dp</dimen>
     <dimen name="px1200">400.0dp</dimen>
     <dimen name="px1430">476.7dp</dimen>
+
+    <dimen name="dp_100">100dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_50">50dp</dimen>
+    <dimen name="px_1">1px</dimen>
+    <dimen name="sp_16">16sp</dimen>
 </resources>
