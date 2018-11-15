@@ -26,11 +26,11 @@ import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.xiongms.libcore.R;
+import com.xiongms.libcore.download.DownloadService;
 import com.xiongms.libcore.glide.GlideLoader;
 import com.xiongms.libcore.updateversion.CheckUpdateOption;
 import com.xiongms.libcore.updateversion.Q;
 import com.xiongms.libcore.updateversion.callback.DownloadCallback;
-import com.xiongms.libcore.updateversion.service.DownloadService;
 import com.xiongms.libcore.utils.AppUtil;
 
 import java.io.File;
@@ -156,7 +156,12 @@ class InternalDialog extends Dialog implements DownloadCallback {
                     .callback(this).execute();
         } else {
             Intent intent = new Intent(mActivity, DownloadService.class);
-            intent.putExtra("CheckUpdateOption", mOption);
+            intent.putExtra("downloadUrl", mOption.getNewAppUrl());
+            intent.putExtra("filePath", mOption.getFilePath());
+            intent.putExtra("fileName", "update.apk");
+            intent.putExtra("iconResId", R.drawable.app_logo);
+            intent.putExtra("isShowProgress", true);
+            intent.putExtra("appName", AppUtil.getAppName(getContext()));
             getContext().startService(intent);
             dismiss();
         }

@@ -100,7 +100,7 @@ public class RegisterPersenter extends BasePresenter<Contract.View> implements C
                         .setFileName("xcc_apk")
                         .setFilePath(FileUtil.getUploadCacheDir())
                         .setImageUrl("http://pic19.nipic.com/20120308/4970979_102637717125_2.jpg")
-                        .setIsForceUpdate(true)
+                        .setIsForceUpdate(false)
                         .setNewAppSize(14)
                         .setNewAppUpdateDesc(t.getBody().getUpContent())
                         .setNewAppUrl(t.getBody().getUrl())

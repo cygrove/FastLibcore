@@ -1,23 +1,15 @@
 package com.xiongms.libcore.updateversion;
 
-import android.content.Intent;
 import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 
 import com.orhanobut.logger.Logger;
-import com.xiongms.libcore.R;
 import com.xiongms.libcore.updateversion.dialog.CheckUpdateDialog;
 import com.xiongms.libcore.updateversion.task.DownloadTask;
-import com.xiongms.libcore.updateversion.task.GetTask;
-import com.xiongms.libcore.updateversion.task.PostTask;
 import com.xiongms.libcore.utils.AppUtil;
-import com.xiongms.libcore.utils.ResourcesUtil;
 import com.xiongms.libcore.utils.ToastUtil;
-
-import java.util.Map;
 
 public class Q {
 
@@ -34,7 +26,7 @@ public class Q {
             filePath = Environment.getExternalStorageDirectory().getPath();
         }
         if (TextUtils.isEmpty(fileName)) {
-            filePath = "checkUpdate.apk";
+            filePath = "Update.apk";
         }
         return new DownloadTask(url, filePath, fileName);
     }

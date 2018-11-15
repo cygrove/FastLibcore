@@ -50,7 +50,7 @@ public class NotificationUtil {
         Intent installIntent = new Intent();
         installIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         installIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        if("apk".equals(FileUtil.getExtensionName(file.getName()))) {
+        if ("apk".equals(FileUtil.getExtensionName(file.getName()))) {
             installIntent.setAction(Intent.ACTION_VIEW);
             Uri uri = FileUtil.getUri(context, file);
             installIntent.setDataAndType(uri, "application/vnd.android.package-archive");
@@ -88,7 +88,7 @@ public class NotificationUtil {
      * @param notificationTitle     通知标题
      * @param isCanClear            通知是否可被清除
      */
-    public static void showDownloadingNotification(Context context, int currentProgress, int totalProgress,  Bitmap largeIcon, int notificationIconResId, String notificationTitle, boolean isCanClear) {
+    public static void showDownloadingNotification(Context context, int currentProgress, int totalProgress, Bitmap largeIcon, int notificationIconResId, String notificationTitle, boolean isCanClear) {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             //ChannelId为"1",ChannelName为"Channel1"
@@ -123,7 +123,7 @@ public class NotificationUtil {
      * @param notificationTitle     通知标题
      * @param isCanClear            通知是否可被清除
      */
-    public static void showDownloadFailureNotification(Context context, Intent intent,  Bitmap largeIcon, int notificationIconResId, String notificationTitle, String notificationContent, boolean isCanClear) {
+    public static void showDownloadFailureNotification(Context context, Intent intent, Bitmap largeIcon, int notificationIconResId, String notificationTitle, String notificationContent, boolean isCanClear) {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             //ChannelId为"1",ChannelName为"Channel1"
