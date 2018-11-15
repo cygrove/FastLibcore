@@ -26,6 +26,7 @@ import com.xiongms.libcore.config.AppConfig;
 import com.xiongms.libcore.enums.EventBusTypeEnum;
 import com.xiongms.libcore.env.Environment;
 import com.xiongms.libcore.glide.GlideLoader;
+import com.xiongms.libcore.utils.FileUtil;
 import com.xiongms.libcore.utils.LoadViewHelper;
 import com.xiongms.libcore.utils.ResourcesUtil;
 import com.xiongms.libcore.utils.ToastUtil;
@@ -94,6 +95,7 @@ public abstract class BaseApplication extends Application implements HasActivity
         initLoadingHelper();
         initGlideConfig();
         registerActivityLifecycleCallbacks();
+        FileUtil.createDefaultDir();
         ToastUtil.init(this);
     }
 

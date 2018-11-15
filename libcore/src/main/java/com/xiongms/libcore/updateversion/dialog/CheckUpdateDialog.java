@@ -174,7 +174,7 @@ class InternalDialog extends Dialog implements DownloadCallback {
     @SuppressLint("SetTextI18n")
     private void initData() {
         if (!TextUtils.isEmpty(mOption.getImageUrl())) {
-            GlideLoader.loadAd(this.getContext(), mOption.getImageUrl(), checkUpdateImage);
+            GlideLoader.loadImage(this.getContext(), mOption.getImageUrl(), checkUpdateImage);
         } else if (mOption.getImageResId() != 0) {
             checkUpdateImage.setImageResource(mOption.getImageResId());
         }

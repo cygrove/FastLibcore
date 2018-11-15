@@ -47,7 +47,7 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
         requestBuilder.header("Proxy-Connection", "keep-alive");
         requestBuilder.header("Cache-Control", "max-age=0");
         requestBuilder.header("Content-Type", "application/json");
-        requestBuilder.header("Token", BaseApplication.getInstance().mEnv.appPreferencesHelper().getToken() + "");
+        requestBuilder.header("token", BaseApplication.getInstance().getEnv().appPreferencesHelper().getToken());
         requestBuilder.header("clt", "android");
         requestBuilder.header("device", Build.MODEL);
         requestBuilder.header("appVersion", Build.VERSION.RELEASE);
@@ -70,7 +70,7 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
                 modifiedUrlBuilder.addQueryParameter("phone", BaseApplication.getInstance().getEnv().appPreferencesHelper().getUserPhone());
             }
 //            return requestBuilder.url(modifiedUrlBuilder.build()).build();
-            return request;
+            return requestBuilder.build();
         } else if (request.body() instanceof FormBody) {
             // 全局修改表单post参数
             FormBody.Builder newFormBody = new FormBody.Builder();
@@ -130,7 +130,7 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
 
             requestBuilder.method(request.method(), requestBody1);
 //            request = requestBuilder.build();
-            return request;
+            return requestBuilder.build();
         }
         return request;
     }

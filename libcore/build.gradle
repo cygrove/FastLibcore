@@ -16,12 +16,12 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField "String", "FILE_PROVIDER", "\"" + "build_config.file_provider = com.cygrove.libcore.fileprovider" + "\""
+            buildConfigField "String", "FILE_PROVIDER", "\"" + "com.xiongms.libcore.provider" + "\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
-            buildConfigField "String", "FILE_PROVIDER", "\"" + "build_config.file_provider = com.cygrove.libcore.fileprovider" + "\""
+            buildConfigField "String", "FILE_PROVIDER", "\"" + "com.xiongms.libcore.provider" + "\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

@@ -18,5 +18,9 @@ public interface Contract {
         void clickShowEmpty();
 
         void clickRefrsh();
+
+        void cheakNewVersion();
+
+        void getToken();
     }
 }

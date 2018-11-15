@@ -18,6 +18,7 @@ import com.xiongms.statusbar.StatusBarHelper;
 import com.xiongms.widget.TitleView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -32,6 +33,10 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
     LinearLayout llRootview;
     @BindView(R.id.title_view)
     TitleView titleView;
+    @BindView(R.id.btn_cheak_new_version)
+    Button btnCheakNewVersion;
+    @BindView(R.id.btn_get_token)
+    Button btnGetToken;
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {
@@ -76,7 +81,7 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
     }
 
 
-    @OnClick({R.id.btn_send, R.id.btn_next})
+    @OnClick({R.id.btn_send, R.id.btn_next, R.id.btn_cheak_new_version, R.id.btn_get_token})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
@@ -84,6 +89,12 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
                 break;
             case R.id.btn_next:
                 mPresenter.clickShowEmpty();
+                break;
+            case R.id.btn_cheak_new_version:
+                mPresenter.cheakNewVersion();
+                break;
+            case R.id.btn_get_token:
+                mPresenter.getToken();
                 break;
         }
     }

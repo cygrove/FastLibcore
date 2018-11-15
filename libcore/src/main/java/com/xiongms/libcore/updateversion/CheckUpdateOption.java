@@ -23,6 +23,16 @@ public class CheckUpdateOption implements Parcelable {
     private String imageUrl;//图片地址
     private int imageResId;//图片本地资源id
 
+    public int getUpStatus() {
+        return upStatus;
+    }
+
+    public void setUpStatus(int upStatus) {
+        this.upStatus = upStatus;
+    }
+
+    private int upStatus;//线上更新状态
+
     private CheckUpdateOption() {
     }
 
