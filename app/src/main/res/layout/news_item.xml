@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.bingoogolapple.swipeitemlayout.BGASwipeItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/delete_tv"
+            android:layout_width="@dimen/px173"
+            android:layout_height="@dimen/px256"
+            android:background="@color/red"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_37px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/item_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px256"
+            android:background="?android:selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/px34"
+            android:paddingRight="@dimen/px34">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:id="@+id/unread_view"
+                        android:layout_width="@dimen/px24"
+                        android:layout_height="@dimen/px24"
+                        android:background="@drawable/button_red_circle_solid_selector" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/px26">
+
+                        <TextView
+                            android:id="@+id/title_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="111"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/font_52px" />
+
+                        <TextView
+                            android:id="@+id/time_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="今天 14:20"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/font_35px" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/content_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/px26"
+                    android:layout_marginTop="@dimen/px16"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="11"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_35px" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px1"
+            android:background="@color/black" />
+    </LinearLayout>
+</cn.bingoogolapple.swipeitemlayout.BGASwipeItemLayout>

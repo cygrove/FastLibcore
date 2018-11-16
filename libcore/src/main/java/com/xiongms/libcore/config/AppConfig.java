@@ -9,5 +9,5 @@ public class AppConfig implements NetConfig, RouterConfig {
 
     public static final String LOGGER_TAG = "QRB";
 
-    public static final int PAGE_SIZE = 20;
+    public static final int PAGE_SIZE = 15;
 }

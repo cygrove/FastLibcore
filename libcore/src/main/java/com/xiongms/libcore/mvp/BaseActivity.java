@@ -2,6 +2,7 @@ package com.xiongms.libcore.mvp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -55,7 +56,7 @@ public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActi
         super.onCreate(savedInstanceState);
         mContext = this;
         ActivityUtil.getInstance().addActivity(this);
-
+        mPresenter.onAttach(this);
         mLoadingDialogUtil = new LoadingDialogUtil(this);
         try {
             int layoutResID = initView(savedInstanceState);
@@ -138,7 +139,7 @@ public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActi
 
     @Override
     public Context getContext() {
-        return this;
+        return mContext;
     }
 
     public void showLoadingDialog() {
@@ -172,5 +173,25 @@ public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActi
     @Override
     public void showToast(String msg) {
         ToastUtil.show(msg);
+    }
+
+    /**
+     * 跳转
+     *
+     * @param to
+     */
+    protected void push(Class<? extends BaseActivity> to) {
+        Intent intent = new Intent(getContext(), to);
+        startActivity(intent);
+    }
+
+    protected void pushExtra(Class<? extends BaseActivity> to, Intent intent) {
+        intent.setClass(getContext(), to);
+        startActivity(intent);
+    }
+
+    protected void pushExtraForResult(Class<? extends BaseActivity> to, Intent intent, int requestCode) {
+        intent.setClass(getContext(), to);
+        startActivityForResult(intent, requestCode);
     }
 }

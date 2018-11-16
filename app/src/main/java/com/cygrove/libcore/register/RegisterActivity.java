@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.cygrove.libcore.R;
+import com.cygrove.libcore.news.mvp.NewsActivity;
 import com.cygrove.libcore.register.contract.Contract;
 import com.cygrove.libcore.register.persenter.RegisterPersenter;
 import com.xiongms.libcore.mvp.BaseActivity;
@@ -37,6 +38,8 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
     Button btnCheakNewVersion;
     @BindView(R.id.btn_get_token)
     Button btnGetToken;
+    @BindView(R.id.btn_jump)
+    Button btnJump;
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {
@@ -48,12 +51,7 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
         mPresenter.onAttach(this);
         titleView.setTitle("Demo");
         titleView.setMenuImgIcon(R.drawable.ic_plus);
-        titleView.setMenuImgClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showToast("onclickMenu");
-            }
-        });
+        titleView.setMenuImgClickListener(view -> showToast("onclickMenu"));
         StatusBarHelper.setStatusBarColor(this, ResourcesUtil.getColor(R.color.text_green));
         requestPermissions();
     }
@@ -67,12 +65,7 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
     public void showEmptyView() {
         loadViewHelper = new LoadViewHelper(llRootview);
         loadViewHelper.showEmpty();
-        loadViewHelper.setOnRefreshListener(new LoadViewHelper.OnRefreshListener() {
-            @Override
-            public void onClickRefresh() {
-                mPresenter.clickRefrsh();
-            }
-        });
+        loadViewHelper.setOnRefreshListener(() -> mPresenter.clickRefrsh());
     }
 
     @Override
@@ -80,8 +73,13 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
         loadViewHelper.showContent();
     }
 
+    @Override
+    public void jump() {
+        push(NewsActivity.class);
+    }
 
-    @OnClick({R.id.btn_send, R.id.btn_next, R.id.btn_cheak_new_version, R.id.btn_get_token})
+
+    @OnClick({R.id.btn_send, R.id.btn_next, R.id.btn_cheak_new_version, R.id.btn_get_token, R.id.btn_jump})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
@@ -95,6 +93,9 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
                 break;
             case R.id.btn_get_token:
                 mPresenter.getToken();
+                break;
+            case R.id.btn_jump:
+                jump();
                 break;
         }
     }

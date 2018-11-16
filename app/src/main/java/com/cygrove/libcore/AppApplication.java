@@ -8,8 +8,6 @@ import com.xiongms.libcore.BaseApplication;
 import com.xiongms.libcore.di.module.ApplicationModule;
 import com.xiongms.libcore.di.module.GlobalConfigModule;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -24,12 +22,9 @@ public class AppApplication extends BaseApplication {
 
     @Override
     public void initDaggerComponent() {
-        Map<String, String> baseUrls = new HashMap<>();
-        baseUrls.put("DOMAIN", "https://ywf.xsfapp.com");
         GlobalConfigModule.Builder configModuleBuilder = new GlobalConfigModule.Builder()
                 .globalHttpHandler(new GlobalHttpHandlerImpl())
-                .baseUrl("https://ywf.xsfapp.com")
-                .baseUrls(baseUrls);
+                .baseUrl("https://t-xcc.xsftest.com");
         mApplicationComponent = DaggerApplicationComponent
                 .builder()
                 .applicationModule(new ApplicationModule(this))

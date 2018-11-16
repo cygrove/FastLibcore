@@ -10,6 +10,8 @@ public interface Contract {
         void showEmptyView();
 
         void showNomalView();
+
+        void jump();
     }
 
     interface Persenter extends IPresenter<View> {

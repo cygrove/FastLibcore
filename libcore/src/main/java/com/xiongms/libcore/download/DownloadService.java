@@ -54,7 +54,7 @@ public class DownloadService extends BaseService {
 
     @Override
     public void downloadSuccess(File file) {
-        NotificationUtil.showDownloadSuccessNotification(this, file, largeIcon, iconResId, appName, "下载完成,点击打开", true);
+        NotificationUtil.showDownloadSuccessNotification(this, file, largeIcon, iconResId, appName, "下载完成,点击打开", false);
     }
 
     @Override
