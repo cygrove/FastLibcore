@@ -10,7 +10,7 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * @author cygrove
- * @time 2018-08-17 11:59
+ * @time 2018-11-15 11:59
  */
 public abstract class RxResultSubscriber<T> implements Observer<BaseBean<T>> {
 

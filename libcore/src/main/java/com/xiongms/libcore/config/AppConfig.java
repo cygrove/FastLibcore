@@ -2,12 +2,12 @@ package com.xiongms.libcore.config;
 
 /**
  * 
- * @author xiongms
- * @time 2018-08-16 13:52
+ * @author cygrove
+ * @time 2018-11-16 13:52
  */
 public class AppConfig implements NetConfig, RouterConfig {
 
-    public static final String LOGGER_TAG = "QRB";
+    public static final String LOGGER_TAG = "LOGGER_TAG";
 
     public static final int PAGE_SIZE = 15;
 }

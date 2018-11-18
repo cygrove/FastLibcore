@@ -6,8 +6,8 @@ import com.google.gson.annotations.SerializedName;
 import java.io.IOException;
 
 /**
- * @author xiongms
- * @time 2018-08-17 12:46
+ * @author cygrove
+ * @time 2018-11-14 11:46
  */
 public class ApiException extends IOException {
 

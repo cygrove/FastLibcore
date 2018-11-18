@@ -8,21 +8,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cygrove.libcore.R;
 import com.cygrove.libcore.news.mvp.NewsActivity;
 import com.cygrove.libcore.register.contract.Contract;
 import com.cygrove.libcore.register.persenter.RegisterPersenter;
+import com.xiongms.libcore.config.RouterConfig;
 import com.xiongms.libcore.mvp.BaseActivity;
+import com.xiongms.libcore.utils.ActivityUtil;
+import com.xiongms.libcore.utils.AppPreferencesHelper;
 import com.xiongms.libcore.utils.LoadViewHelper;
 import com.xiongms.libcore.utils.ResourcesUtil;
 import com.xiongms.statusbar.StatusBarHelper;
 import com.xiongms.widget.TitleView;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pub.devrel.easypermissions.EasyPermissions;
 
+@Route(path = RouterConfig.ROUTER_LOGIN)
 public class RegisterActivity extends BaseActivity<RegisterPersenter> implements Contract.View {
     @BindView(R.id.ed_phone)
     EditText edPhone;
@@ -40,14 +46,23 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
     Button btnGetToken;
     @BindView(R.id.btn_jump)
     Button btnJump;
+    @BindView(R.id.btn_clear_token)
+    Button btnClearToken;
+    @Inject
+    public AppPreferencesHelper spHelper;
 
     @Override
+
     public int initView(@Nullable Bundle savedInstanceState) {
         return R.layout.activity_register;
     }
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        boolean isTokenError = getIntent().getBooleanExtra("TokenError", false);
+        if (isTokenError) {
+            ActivityUtil.getInstance().clearAllActivityWithout(RegisterActivity.class);
+        }
         mPresenter.onAttach(this);
         titleView.setTitle("Demo");
         titleView.setMenuImgIcon(R.drawable.ic_plus);
@@ -79,7 +94,7 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
     }
 
 
-    @OnClick({R.id.btn_send, R.id.btn_next, R.id.btn_cheak_new_version, R.id.btn_get_token, R.id.btn_jump})
+    @OnClick({R.id.btn_send, R.id.btn_next, R.id.btn_cheak_new_version, R.id.btn_get_token, R.id.btn_jump, R.id.btn_clear_token})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
@@ -96,6 +111,9 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
                 break;
             case R.id.btn_jump:
                 jump();
+                break;
+            case R.id.btn_clear_token:
+                spHelper.setToken("123");
                 break;
         }
     }

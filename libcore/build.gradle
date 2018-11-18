@@ -9,8 +9,15 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0.0"
+        renderscriptTargetApi 28
+        renderscriptSupportModeEnabled true
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -39,6 +46,10 @@ android {
     }
     lintOptions {
         disable 'GoogleAppIndexingWarning'
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
     }
 }
 
@@ -85,6 +96,8 @@ dependencies {
     api 'me.jessyan:retrofit-url-manager:1.4.0'
     // auto-parcel
     api 'com.github.frankiesardo:auto-parcel:0.3.1'
+    // arouter
+    api 'com.alibaba:arouter-api:1.4.0'
     // gson
     api 'com.google.code.gson:gson:2.8.5'
     // cookie
@@ -126,6 +139,7 @@ dependencies {
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.30"
     api 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
+    api 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
     // apt
     annotationProcessor 'com.github.frankiesardo:auto-parcel-processor:0.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'

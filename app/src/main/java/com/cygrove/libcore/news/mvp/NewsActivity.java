@@ -3,32 +3,30 @@ package com.cygrove.libcore.news.mvp;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.cygrove.libcore.R;
 import com.cygrove.libcore.adapter.NewsAdapter;
 import com.cygrove.libcore.news.bean.NewsEntry;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.xiongms.libcore.bean.BaseBean;
+import com.scwang.smartrefresh.layout.util.DensityUtil;
 import com.xiongms.libcore.mvp.BaseActivity;
 import com.xiongms.libcore.utils.LoadViewHelper;
-import com.xiongms.statusbar.StatusBarHelper;
+import com.xiongms.libcore.utils.StatusBarUtil;
+import com.xiongms.widget.TitleView;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class NewsActivity extends BaseActivity<NewPersenter> implements Contract.View {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.refresh_layout)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.title)
+    TitleView title;
     private NewsAdapter adapter;
 
     @Override
@@ -38,14 +36,17 @@ public class NewsActivity extends BaseActivity<NewPersenter> implements Contract
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        StatusBarHelper.setStatusBarColor(this, Color.parseColor("#3a000000"), false);
-
+        title.setTitle("列表");
+        refreshLayout.setEnableFooterFollowWhenLoadFinished(true);
         refreshLayout.setOnRefreshListener(refreshLayout -> mPresenter.refreshData());
         refreshLayout.setOnLoadMoreListener(refreshLayout -> mPresenter.loadmoreData());
-        mPresenter.reqData();
-        adapter = new NewsAdapter(this);
         loadViewHelper = new LoadViewHelper(refreshLayout);
-
+        mPresenter.reqData();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new NewsAdapter(this);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -63,6 +64,11 @@ public class NewsActivity extends BaseActivity<NewPersenter> implements Contract
         if (loadViewHelper != null) {
             loadViewHelper.showEmpty();
         }
+    }
+
+    @Override
+    public void showLoading(boolean isDialog) {
+        loadViewHelper.showLoading();
     }
 
     @Override

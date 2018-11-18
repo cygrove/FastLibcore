@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
@@ -19,8 +20,12 @@ import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
 import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.footer.FalsifyFooter;
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.header.FalsifyHeader;
 import com.xiongms.libcore.bean.User;
 import com.xiongms.libcore.config.AppConfig;
 import com.xiongms.libcore.enums.EventBusTypeEnum;
@@ -38,6 +43,7 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
+import pl.droidsonroids.gif.GifImageView;
 
 /**
  * @author cygrove
@@ -91,6 +97,7 @@ public abstract class BaseApplication extends Application implements HasActivity
         // 部分机型中兼容vector图片
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         initLogger();
+        initArouter();
         initRefreshLayout();
         initLoadingHelper();
         initGlideConfig();
@@ -118,21 +125,23 @@ public abstract class BaseApplication extends Application implements HasActivity
 
     private void initRefreshLayout() {
         //设置全局的Header构建器
-        SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
-            @Override
-            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
-                layout.setPrimaryColors(Color.parseColor("#444444"), Color.WHITE);//全局设置主题颜色
-                return new ClassicsHeader(context).setFinishDuration(0).setEnableLastTime(false);
-            }
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
+            layout.setPrimaryColors(Color.parseColor("#444444"), Color.WHITE);//全局设置主题颜色
+            return new ClassicsHeader(context);
         });
         //设置全局的Footer构建器
-        SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
-            @Override
-            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
-                //指定为经典Footer，默认是 BallPulseFooter
-                return new ClassicsFooter(context).setDrawableSize(20).setFinishDuration(0);
-            }
+        SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) -> {
+            //指定为经典Footer，默认是 BallPulseFooter
+            return new ClassicsFooter(context).setDrawableSize(10);
         });
+    }
+
+    private void initArouter() {
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(mApplication);
     }
 
     /**

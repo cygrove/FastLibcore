@@ -30,7 +30,6 @@ public class MainPresenter extends BasePresenter<Contract.View> implements Contr
 
     private MainPageApi userServiceApi;
 
-    private String orgMobile;
 
     private static final int MAX_COUNT_TIME = 60;
 
@@ -57,7 +56,6 @@ public class MainPresenter extends BasePresenter<Contract.View> implements Contr
 
         userServiceApi = mRetrofit.create(MainPageApi.class);
 
-        orgMobile = mEnv.appPreferencesHelper().getUser().getPhone();
 
         // 进入登录页面后，删除保存的所有sharedpreference信息
         mEnv.appPreferencesHelper().removeAll();

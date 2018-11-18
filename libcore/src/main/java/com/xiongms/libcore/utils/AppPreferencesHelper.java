@@ -17,7 +17,6 @@ import javax.inject.Inject;
  * @time 2018-11-14 16:55
  */
 public class AppPreferencesHelper {
-    public final static String KEY_SP_USER_PHONE = "key_sp_user_phone";
 
     public final static String KEY_SP_USER_INFO = "key_sp_user_info";
 
@@ -35,13 +34,6 @@ public class AppPreferencesHelper {
         mPrefs = context.getSharedPreferences(prefFileName, Context.MODE_PRIVATE);
     }
 
-    public void setUserPhone(String phone) {
-        mPrefs.edit().putString(KEY_SP_USER_PHONE, phone).apply();
-    }
-
-    public String getUserPhone() {
-        return mPrefs.getString(KEY_SP_USER_PHONE, "");
-    }
 
     public void setToken(String token) {
         if (!TextUtils.isEmpty(token)) {
@@ -58,9 +50,6 @@ public class AppPreferencesHelper {
     }
 
     public void setUser(User userInfo) {
-        if (userInfo != null) {
-            setUserPhone(userInfo.getPhone());
-        }
         String sUserInfo = mGson.toJson(userInfo);
         mPrefs.edit().putString(KEY_SP_USER_INFO, sUserInfo).apply();
     }

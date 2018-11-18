@@ -3,6 +3,7 @@ package com.xiongms.libcore.mvp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -127,6 +128,7 @@ public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActi
     public void setStatusBarColor(int color) {
         try {
             StatusBarHelper.setStatusBarColor(this, color);
+            StatusBarHelper.setFitsSystemWindows(getWindow(), true);
         } catch (Exception ex) {
 
         }

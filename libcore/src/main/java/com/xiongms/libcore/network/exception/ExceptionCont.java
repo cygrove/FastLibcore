@@ -7,10 +7,6 @@ package com.xiongms.libcore.network.exception;
 public class ExceptionCont {
 
     /**
-     * 约定异常 这个具体规则需要与服务端或者领导商讨定义
-     */
-
-    /**
      * 登录无效
      */
     public static final String TOKEN_ERROR = "SYS-APP-002";

@@ -35,8 +35,7 @@ public class LoadingImageView extends android.support.v7.widget.AppCompatImageVi
     }
 
     private void init() {
-        setImageResource(R.drawable.loading_drawable_anim);
-
+        setImageResource(R.drawable.kprogresshud_spinner);
         animationDrawable = (AnimationDrawable) getDrawable();
     }
 

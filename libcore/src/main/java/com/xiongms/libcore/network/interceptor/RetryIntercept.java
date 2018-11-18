@@ -8,8 +8,8 @@ import okhttp3.Response;
 
 /**
  * 自动重试
- * @author xiongms
- * @time 2018-08-16 16:04
+ * @author cygrove
+ * @time 2018-11-16 16:04
  */
 public class RetryIntercept implements Interceptor {
 
@@ -23,11 +23,9 @@ public class RetryIntercept implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        System.out.println("retryNum=" + retryNum);
         Response response = chain.proceed(request);
         while (!response.isSuccessful() && retryNum < maxRetry) {
             retryNum++;
-            System.out.println("retryNum=" + retryNum);
             response = chain.proceed(request);
         }
         return response;

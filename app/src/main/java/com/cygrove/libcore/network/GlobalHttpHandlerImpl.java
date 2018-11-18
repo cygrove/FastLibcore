@@ -50,7 +50,7 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
         requestBuilder.header("token", BaseApplication.getInstance().getEnv().appPreferencesHelper().getToken());
         requestBuilder.header("clt", "android");
         requestBuilder.header("device", Build.MODEL);
-        requestBuilder.header("appVersion", Build.VERSION.RELEASE);
+        requestBuilder.header("appVersion", BaseApplication.getInstance().getEnv().appVersion());
 
         requestBuilder.method(method, request.body());
 
@@ -66,10 +66,7 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
 
             modifiedUrlBuilder.addQueryParameter("tkn", BaseApplication.getInstance().getEnv().appPreferencesHelper().getToken());
 
-            if (StrUtil.isEmpty(modifiedUrlBuilder.build().queryParameter("phone"))) {
-                modifiedUrlBuilder.addQueryParameter("phone", BaseApplication.getInstance().getEnv().appPreferencesHelper().getUserPhone());
-            }
-//            return requestBuilder.url(modifiedUrlBuilder.build()).build();
+//            return requestBuilder.url(modifiedUrlBuilder.build()).build();//同理如果接口有特殊要求的。可以解开注释、追加以上参数
             return requestBuilder.build();
         } else if (request.body() instanceof FormBody) {
             // 全局修改表单post参数
@@ -110,26 +107,15 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
 
                 jsonObject.put("tkn", BaseApplication.getInstance().getEnv().appPreferencesHelper().getToken());
 
-                boolean hadPhone = false;
-                try {
-                    hadPhone = !StrUtil.isEmpty(jsonObject.getString("phone"));
-                } catch (Exception ex) {
-                }
-                if (!hadPhone) {
-                    String phone = BaseApplication.getInstance().getEnv().appPreferencesHelper().getUserPhone();
-                    jsonObject.put("phone", phone);
-                }
-
                 newJsonBody = jsonObject.toString();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
             RequestBody requestBody1 = RequestBody.create(MediaType.parse("application/json"), newJsonBody);
-            //TODO add param
 
             requestBuilder.method(request.method(), requestBody1);
-//            request = requestBuilder.build();
+//            request = requestbuilder.build();//如果接口有特殊要求的。可以解开注释、追加以上参数
             return requestBuilder.build();
         }
         return request;

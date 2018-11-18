@@ -1,7 +1,10 @@
 package com.xiongms.libcore.network.rx;
 
+import android.content.Intent;
 import android.os.NetworkOnMainThreadException;
+import android.util.Log;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.stream.MalformedJsonException;
@@ -11,8 +14,13 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.xiongms.libcore.BaseApplication;
 import com.xiongms.libcore.bean.BaseBean;
+import com.xiongms.libcore.bean.User;
+import com.xiongms.libcore.config.RouterConfig;
 import com.xiongms.libcore.network.exception.ApiException;
 import com.xiongms.libcore.network.exception.ExceptionCont;
+import com.xiongms.libcore.utils.ActivityUtil;
+import com.xiongms.libcore.utils.JsonUtil;
+import com.xiongms.libcore.utils.ToastUtil;
 
 import org.json.JSONException;
 
@@ -26,17 +34,20 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.Subject;
 import okhttp3.RequestBody;
 import retrofit2.HttpException;
+
+import static com.xiongms.libcore.network.exception.ExceptionCont.TOKEN_ERROR;
 
 /**
  * @author cygrove
  * @time 2018-11-14 17:11
  */
 public class RxUtils {
-
-    private static final String TAG = RxUtils.class.getSimpleName();
 
     /**
      * 获取json格式requestbody
@@ -62,12 +73,7 @@ public class RxUtils {
         } else if (lifecycle instanceof RxFragment) {
             return ((RxFragment) lifecycle).bindUntilEvent(FragmentEvent.DESTROY_VIEW);
         } else {
-            return new ObservableTransformer() {
-                @Override
-                public ObservableSource apply(Observable upstream) {
-                    return upstream;
-                }
-            };
+            return upstream -> upstream;
         }
     }
 
@@ -77,15 +83,59 @@ public class RxUtils {
      * 更新ui在主线程
      */
     public static <R> ObservableTransformer schedulersTransformer() {
-        return new ObservableTransformer() {
-            @Override
-            public ObservableSource apply(Observable upstream) {
-                return upstream.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-            }
-        };
+        return upstream -> upstream.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
+    /**
+     * 检查返回值，如果token失效，抛出异常
+     *
+     * @param <T>
+     * @return
+     */
+    public static <T> ObservableTransformer<T, T> handleResult() {
+        return tObservable -> tObservable.flatMap((Function<T, ObservableSource<T>>) resultEntity -> {
+            BaseBean baseBean = null;
+            if (resultEntity instanceof String) {
+                baseBean = JsonUtil.fromJson((String) resultEntity, BaseBean.class);
+            } else if (resultEntity instanceof BaseBean) {
+                baseBean = (BaseBean) resultEntity;
+            }
+
+            if (baseBean != null && TOKEN_ERROR.equals(baseBean.getCode())) {
+                // 当前返回值为BaseBean格式，并且code为token失效，需要抛出异常
+                return Observable.error(new ApiException(baseBean.getMessage(), baseBean.getCode()));
+            }
+            return Observable.just(resultEntity);
+        });
+    }
+
+
+    public static Observable tokenError() {
+        ARouter.getInstance().build(RouterConfig.ROUTER_LOGIN)
+                .withFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .withBoolean("RefreshToken", true)
+                .navigation(BaseApplication.getInstance().getContext());
+        return PublishSubject.create();
+    }
+
+    /**
+     * 处理token无效
+     *
+     * @return
+     */
+    public static Function<Observable<Throwable>, ObservableSource<?>> handleRetryWhen() {
+        return throwableObservable -> throwableObservable.flatMap((Function<Throwable, ObservableSource<?>>) throwable -> {
+            if (throwable instanceof ApiException) {
+                ApiException apiException = (ApiException) throwable;
+                if (apiException.getStrCode().equals(TOKEN_ERROR)) {
+                    ToastUtil.show(apiException.getMessage());
+                    return tokenError();
+                }
+            }
+            return Observable.error(throwable);
+        });
+    }
 
     public static <T> T getResultData(BaseBean<T> baseBean) throws ApiException {
         if (!baseBean.getCode().equals("OK")) {

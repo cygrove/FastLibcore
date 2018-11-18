@@ -12,16 +12,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xiongms.libcore.R;
+import com.xiongms.libcore.bean.BaseBean;
+import com.xiongms.libcore.mvp.BaseActivity;
+import com.xiongms.statusbar.StatusBarHelper;
 
 /**
- * 自定义title 集成返回、标题、菜单
- * Created by xiongms on 2018/07/03.
+ * by cy on 2018/11/13.
  */
 
 public class TitleView extends RelativeLayout {
-
     public static final int STYLE_BLACK = 0;
     public static final int STYLE_WHITE = 1;
+    public static final int STYLE_GREEN = 2;
 
     protected RelativeLayout rlContent;
     protected ImageView ivBack;
@@ -54,20 +56,14 @@ public class TitleView extends RelativeLayout {
         tvMenu = (TextView) rootView.findViewById(R.id.tv_menu);
         lineView = rootView.findViewById(R.id.line_view);
 
-        ivBack.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v.getContext() instanceof Activity) {
-                    ((Activity) v.getContext()).finish();
-                }
+        ivBack.setOnClickListener(v -> {
+            if (v.getContext() instanceof Activity) {
+                ((Activity) v.getContext()).finish();
             }
         });
-        tvBack.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v.getContext() instanceof Activity) {
-                    ((Activity) v.getContext()).finish();
-                }
+        tvBack.setOnClickListener(v -> {
+            if (v.getContext() instanceof Activity) {
+                ((Activity) v.getContext()).finish();
             }
         });
     }
@@ -83,6 +79,13 @@ public class TitleView extends RelativeLayout {
                 break;
             case STYLE_WHITE:
                 rlContent.setBackgroundColor(Color.WHITE);
+                tvTitle.setTextColor(getResources().getColor(R.color.text_black));
+                tvMenu.setTextColor(getResources().getColor(R.color.text_black));
+                ivBack.setImageResource(R.drawable.ic_back);
+                lineView.setVisibility(VISIBLE);
+                break;
+            case STYLE_GREEN:
+                rlContent.setBackgroundColor(Color.parseColor("#111111"));
                 tvTitle.setTextColor(getResources().getColor(R.color.text_black));
                 tvMenu.setTextColor(getResources().getColor(R.color.text_black));
                 ivBack.setImageResource(R.drawable.ic_back);

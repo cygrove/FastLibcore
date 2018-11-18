@@ -20,8 +20,8 @@ import okio.BufferedSource;
 /**
  * 自定义请求日志
  *
- * @author xiongms
- * @time 2018-08-17 11:41
+ * @author cygrove
+ * @time 2018-11-16 11:41
  */
 public class LoggingInterceptor implements Interceptor {
 
@@ -70,11 +70,4 @@ public class LoggingInterceptor implements Interceptor {
 
         return response;
     }
-
-
-    private boolean bodyEncoded(Headers headers) {
-        String contentEncoding = headers.get("Content-Encoding");
-        return contentEncoding != null && !contentEncoding.equalsIgnoreCase("identity");
-    }
-
 }

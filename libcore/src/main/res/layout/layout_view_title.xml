@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_content"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/px125"
+    android:layout_height="?attr/actionBarSize"
     android:background="@color/white">
 
     <ImageView
@@ -45,7 +45,8 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:padding="10dp"
-        android:src="@drawable/ic_plus" />
+        android:src="@drawable/ic_plus"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_menu"

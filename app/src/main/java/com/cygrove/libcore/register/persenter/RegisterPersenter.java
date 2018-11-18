@@ -19,6 +19,7 @@ import com.xiongms.libcore.network.rx.RxResultSubscriber;
 import com.xiongms.libcore.secret.SecretUtil;
 import com.xiongms.libcore.updateversion.CheckUpdateOption;
 import com.xiongms.libcore.updateversion.Q;
+import com.xiongms.libcore.utils.AppPreferencesHelper;
 import com.xiongms.libcore.utils.FileUtil;
 import com.xiongms.libcore.utils.ResourcesUtil;
 
@@ -32,6 +33,8 @@ public class RegisterPersenter extends BasePresenter<Contract.View> implements C
     private LoginApi loginApi;
     @Inject
     public Retrofit retrofit;
+    @Inject
+    public AppPreferencesHelper spHelper;
 
     @Inject
     public RegisterPersenter(Retrofit retrofit) {
@@ -137,7 +140,7 @@ public class RegisterPersenter extends BasePresenter<Contract.View> implements C
             public void success(BaseBean<LoginMoudule> t) {
                 mRootView.hideLoading();
                 BaseApplication.getInstance().getEnv().appPreferencesHelper().setToken(t.getBody().getToken());
-                mRootView.showToast("已经存入token:" + BaseApplication.getInstance().getEnv().appPreferencesHelper().getToken());
+                mRootView.showToast("已经存入token:" + spHelper.getToken());
             }
         });
     }
