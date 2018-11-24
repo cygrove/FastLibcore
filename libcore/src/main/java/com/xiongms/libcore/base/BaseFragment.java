@@ -1,4 +1,4 @@
-package com.xiongms.libcore.mvp;
+package com.xiongms.libcore.base;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,22 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.trello.rxlifecycle2.components.support.RxFragment;
+import com.xiongms.libcore.mvp.IPresenter;
+import com.xiongms.libcore.mvp.IView;
 import com.xiongms.libcore.utils.ToastUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * @author xiongms
- * @time 2018-08-17 15:55
+ * @author cygrove
+ * @time 2018-11-17 15:55
  */
-public abstract class BaseFragment<P extends IPresenter> extends RxFragment implements IView {
+public abstract class BaseFragment extends RxFragment implements IView {
     protected final String TAG = this.getClass().getSimpleName();
 
     protected View mRootView;
-
-    @Nullable
-    protected P mPresenter;//如果当前页面逻辑简单, Presenter 可以为 null
 
     private Unbinder mUnbinder;
 
@@ -75,8 +74,6 @@ public abstract class BaseFragment<P extends IPresenter> extends RxFragment impl
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mPresenter != null) mPresenter.onDetach();//释放资源
-        this.mPresenter = null;
     }
 
     @Override

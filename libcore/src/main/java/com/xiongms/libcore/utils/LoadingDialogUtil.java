@@ -20,14 +20,9 @@ import com.xiongms.libcore.R;
 public class LoadingDialogUtil {
 
     private Dialog mLoadingDialog;
-
-    private Context mContext;
-
     private int mShowedCount = 0;
 
-    public LoadingDialogUtil(Context context) {
-        mContext = context;
-        mLoadingDialog = createLoadingDialog(context);
+    public LoadingDialogUtil() {
     }
 
     private Dialog createLoadingDialog(Context context) {
@@ -43,13 +38,7 @@ public class LoadingDialogUtil {
         loadingDialog.setContentView(layout, new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT));
-        loadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                mShowedCount = 0;
-            }
-        });
-
+        loadingDialog.setOnDismissListener(dialogInterface -> mShowedCount = 0);
 
 
         return loadingDialog;

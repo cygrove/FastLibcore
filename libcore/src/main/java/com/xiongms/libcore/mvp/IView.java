@@ -3,8 +3,8 @@ package com.xiongms.libcore.mvp;
 import android.content.Context;
 
 /**
- * @author xiongms
- * @time 2018-08-22 11:13
+ * @author cygrove
+ * @time 2018-11-12 11:13
  */
 public interface IView {
     Context getContext();

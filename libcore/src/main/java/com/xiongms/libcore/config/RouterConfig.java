@@ -9,5 +9,5 @@ public interface RouterConfig {
     /**
      * 登录
      */
-    String ROUTER_LOGIN = "/register/";
+    String ROUTER_LOGIN = "/register/registerActivity";
 }

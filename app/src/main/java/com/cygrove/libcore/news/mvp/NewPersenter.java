@@ -34,12 +34,13 @@ public class NewPersenter extends BasePresenter<Contract.View> implements Contra
     }
 
     @Override
-    public void reqData() {
+    public void reqData(boolean isShowLoadding) {
         RxResultHelper.getHttpObservable(mRootView.getContext(), api.reqData(currentPage, AppConfig.PAGE_SIZE))
                 .subscribe(new RxResultSubscriber<BasePageBean<NewsEntry>>() {
                     @Override
                     public void start() {
-                        mRootView.showLoading(true);
+                        if (isShowLoadding)
+                            mRootView.showLoading(true);
                     }
 
                     @Override
@@ -76,12 +77,12 @@ public class NewPersenter extends BasePresenter<Contract.View> implements Contra
     @Override
     public void refreshData() {
         currentPage = 1;
-        reqData();
+        reqData(false);
     }
 
     @Override
     public void loadmoreData() {
         currentPage++;
-        reqData();
+        reqData(false);
     }
 }

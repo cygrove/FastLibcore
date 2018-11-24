@@ -12,9 +12,11 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cygrove.libcore.R;
 import com.cygrove.libcore.news.mvp.NewsActivity;
 import com.cygrove.libcore.register.contract.Contract;
+import com.cygrove.libcore.register.moudule.LoginMoudule;
 import com.cygrove.libcore.register.persenter.RegisterPersenter;
 import com.xiongms.libcore.config.RouterConfig;
-import com.xiongms.libcore.mvp.BaseActivity;
+import com.xiongms.libcore.base.BaseActivity;
+import com.xiongms.libcore.mvp.BaseMVPActivity;
 import com.xiongms.libcore.utils.ActivityUtil;
 import com.xiongms.libcore.utils.AppPreferencesHelper;
 import com.xiongms.libcore.utils.LoadViewHelper;
@@ -22,14 +24,18 @@ import com.xiongms.libcore.utils.ResourcesUtil;
 import com.xiongms.statusbar.StatusBarHelper;
 import com.xiongms.widget.TitleView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
 import pub.devrel.easypermissions.EasyPermissions;
 
 @Route(path = RouterConfig.ROUTER_LOGIN)
-public class RegisterActivity extends BaseActivity<RegisterPersenter> implements Contract.View {
+public class RegisterActivity extends BaseMVPActivity<RegisterPersenter> implements Contract.View {
     @BindView(R.id.ed_phone)
     EditText edPhone;
     @BindView(R.id.btn_send)
@@ -50,6 +56,8 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
     Button btnClearToken;
     @Inject
     public AppPreferencesHelper spHelper;
+    private boolean isTokenError;
+    private Observable timer;
 
     @Override
 
@@ -59,16 +67,28 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        boolean isTokenError = getIntent().getBooleanExtra("TokenError", false);
-        if (isTokenError) {
-            ActivityUtil.getInstance().clearAllActivityWithout(RegisterActivity.class);
-        }
+        isTokenError = getIntent().getBooleanExtra("TokenError", false);
         mPresenter.onAttach(this);
         titleView.setTitle("Demo");
         titleView.setMenuImgIcon(R.drawable.ic_plus);
         titleView.setMenuImgClickListener(view -> showToast("onclickMenu"));
         StatusBarHelper.setStatusBarColor(this, ResourcesUtil.getColor(R.color.text_green));
         requestPermissions();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isTokenError) {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    ActivityUtil.getInstance().clearAllActivityWithout(RegisterActivity.class);
+                }
+            }, 1000);
+//
+        }
     }
 
     @Override
@@ -93,6 +113,13 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
         push(NewsActivity.class);
     }
 
+    @Override
+    public void saveEntry(LoginMoudule moudule) {
+        spHelper.saveModel(moudule);
+        LoginMoudule moud = spHelper.getModel(LoginMoudule.class);
+        com.orhanobut.logger.Logger.d(moud);
+    }
+
 
     @OnClick({R.id.btn_send, R.id.btn_next, R.id.btn_cheak_new_version, R.id.btn_get_token, R.id.btn_jump, R.id.btn_clear_token})
     public void onViewClicked(View view) {
@@ -113,7 +140,7 @@ public class RegisterActivity extends BaseActivity<RegisterPersenter> implements
                 jump();
                 break;
             case R.id.btn_clear_token:
-                spHelper.setToken("123");
+                mPresenter.clickClearToken();
                 break;
         }
     }

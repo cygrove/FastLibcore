@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
-import com.xiongms.libcore.bean.User;
 import com.xiongms.libcore.di.qualifiers.ApplicationContext;
 import com.xiongms.libcore.di.qualifiers.PreferenceInfo;
 
@@ -17,9 +16,6 @@ import javax.inject.Inject;
  * @time 2018-11-14 16:55
  */
 public class AppPreferencesHelper {
-
-    public final static String KEY_SP_USER_INFO = "key_sp_user_info";
-
     public final static String KEY_SP_TOKEN = "key_sp_token";
 
     private final SharedPreferences mPrefs;
@@ -35,6 +31,23 @@ public class AppPreferencesHelper {
     }
 
 
+    public synchronized void saveModel(Object object) {
+        if (object != null) {
+            String sInfo = GsonUtils.gsonToString(object);
+            if (!TextUtils.isEmpty(sInfo)) {
+                mPrefs.edit().putString(object.getClass().getSimpleName(), sInfo).apply();
+            }
+        }
+    }
+
+    public synchronized <T> T getModel(Class<T> classz) {
+        String sInfo = mPrefs.getString(classz.getSimpleName(), "");
+        if (!TextUtils.isEmpty(sInfo)) {
+            return mGson.fromJson(sInfo, classz);
+        }
+        return null;
+    }
+
     public void setToken(String token) {
         if (!TextUtils.isEmpty(token)) {
             mPrefs.edit().putString(KEY_SP_TOKEN, token).apply();
@@ -47,19 +60,6 @@ public class AppPreferencesHelper {
             return token;
         }
         return "";
-    }
-
-    public void setUser(User userInfo) {
-        String sUserInfo = mGson.toJson(userInfo);
-        mPrefs.edit().putString(KEY_SP_USER_INFO, sUserInfo).apply();
-    }
-
-    public User getUser() {
-        String sUser = mPrefs.getString(KEY_SP_USER_INFO, "");
-        User user = mGson.fromJson(sUser, User.class);
-        if (user == null)
-            user = new User();
-        return user;
     }
 
     public void removeAll() {

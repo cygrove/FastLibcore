@@ -17,7 +17,7 @@ import android.view.animation.LinearInterpolator;
 
 /**
  * 简单圆形加载loading圈
- * add by xiongms 2018-08-02
+ * update by cygrove 2018-08-02
  */
 public class SingleCircleLoadingView extends View implements ValueAnimator.AnimatorUpdateListener, Animator.AnimatorListener {
 
@@ -26,6 +26,8 @@ public class SingleCircleLoadingView extends View implements ValueAnimator.Anima
     protected static final float DEFAULT_SIZE = 20.0f;
     protected static final long ANIMATION_START_DELAY = 333;
     protected static final long ANIMATION_DURATION = 1333;
+    private static int PROGRESS_COLOR = Color.RED;
+    private static int BACKGROUND_COLOR = Color.LTGRAY;
 //    protected static final long ANIMATION_START_DELAY = 333;
 //    protected static final long ANIMATION_DURATION = 9333;
 
@@ -109,7 +111,7 @@ public class SingleCircleLoadingView extends View implements ValueAnimator.Anima
         mStrokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mStrokePaint.setStyle(Paint.Style.STROKE);
         mStrokePaint.setStrokeWidth(lineWidth);
-        mStrokePaint.setColor(Color.RED);
+        mStrokePaint.setColor(PROGRESS_COLOR);
         mStrokePaint.setDither(true);
         mStrokePaint.setFilterBitmap(true);
         mStrokePaint.setStrokeCap(Paint.Cap.ROUND);
@@ -119,7 +121,7 @@ public class SingleCircleLoadingView extends View implements ValueAnimator.Anima
         mBgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBgPaint.setStyle(Paint.Style.STROKE);
         mBgPaint.setStrokeWidth(lineWidth);
-        mBgPaint.setColor(Color.LTGRAY);
+        mBgPaint.setColor(BACKGROUND_COLOR);
         mBgPaint.setDither(true);
         mBgPaint.setFilterBitmap(true);
         mBgPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -192,7 +194,7 @@ public class SingleCircleLoadingView extends View implements ValueAnimator.Anima
         // 先快后慢的动画
         mStartRotateAngle = (int) (360 * animatedValue) % 360;
         mRotateAngle = (int) (mStartRotateAngle * 1.2f);
-        if(mStartRotateAngle + mRotateAngle > 360) {
+        if (mStartRotateAngle + mRotateAngle > 360) {
             mRotateAngle = 360 - mStartRotateAngle;
         }
 
@@ -248,6 +250,7 @@ public class SingleCircleLoadingView extends View implements ValueAnimator.Anima
     public void onAnimationCancel(Animator animation) {
 
     }
+
     protected long getAnimationStartDelay() {
         return ANIMATION_START_DELAY;
     }

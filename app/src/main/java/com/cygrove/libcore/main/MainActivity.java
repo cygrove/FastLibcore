@@ -12,17 +12,16 @@ import com.cygrove.libcore.R;
 import com.cygrove.libcore.main.contract.Contract;
 import com.cygrove.libcore.main.entity.HousingEstate;
 import com.cygrove.libcore.main.persenter.MainPresenter;
-import com.google.gson.Gson;
 import com.xiongms.libcore.bean.BaseBean;
-import com.xiongms.libcore.mvp.BaseActivity;
+import com.xiongms.libcore.base.BaseActivity;
+import com.xiongms.libcore.mvp.BaseMVPActivity;
 import com.xiongms.widget.TitleView;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity<MainPresenter> implements Contract.View {
+public class MainActivity extends BaseMVPActivity<MainPresenter> implements Contract.View {
     @BindView(R.id.title_view)
     TitleView titleView;
     @BindView(R.id.iv_community_bg)

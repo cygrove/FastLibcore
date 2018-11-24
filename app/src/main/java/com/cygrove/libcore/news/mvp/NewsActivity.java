@@ -1,6 +1,5 @@
 package com.cygrove.libcore.news.mvp;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,17 +9,16 @@ import com.cygrove.libcore.R;
 import com.cygrove.libcore.adapter.NewsAdapter;
 import com.cygrove.libcore.news.bean.NewsEntry;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.util.DensityUtil;
-import com.xiongms.libcore.mvp.BaseActivity;
+import com.xiongms.libcore.base.BaseActivity;
+import com.xiongms.libcore.mvp.BaseMVPActivity;
 import com.xiongms.libcore.utils.LoadViewHelper;
-import com.xiongms.libcore.utils.StatusBarUtil;
 import com.xiongms.widget.TitleView;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class NewsActivity extends BaseActivity<NewPersenter> implements Contract.View {
+public class NewsActivity extends BaseMVPActivity<NewPersenter> implements Contract.View {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.refresh_layout)
@@ -41,7 +39,7 @@ public class NewsActivity extends BaseActivity<NewPersenter> implements Contract
         refreshLayout.setOnRefreshListener(refreshLayout -> mPresenter.refreshData());
         refreshLayout.setOnLoadMoreListener(refreshLayout -> mPresenter.loadmoreData());
         loadViewHelper = new LoadViewHelper(refreshLayout);
-        mPresenter.reqData();
+        mPresenter.reqData(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);

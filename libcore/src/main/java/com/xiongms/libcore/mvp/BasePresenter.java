@@ -14,9 +14,8 @@ import com.trello.rxlifecycle2.RxLifecycle;
 import io.reactivex.functions.Action;
 
 /**
- * 
- * @author xiongms
- * @time 2018-08-17 15:09
+ * @author cygrove
+ * @time 2018-11-17 15:09
  */
 public class BasePresenter<V extends IView> implements IPresenter<V>, LifecycleObserver {
     protected final String TAG = this.getClass().getSimpleName();

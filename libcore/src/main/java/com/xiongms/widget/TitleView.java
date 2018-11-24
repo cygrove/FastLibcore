@@ -12,9 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xiongms.libcore.R;
-import com.xiongms.libcore.bean.BaseBean;
-import com.xiongms.libcore.mvp.BaseActivity;
-import com.xiongms.statusbar.StatusBarHelper;
 
 /**
  * by cy on 2018/11/13.

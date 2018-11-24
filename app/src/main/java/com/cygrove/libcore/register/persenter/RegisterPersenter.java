@@ -139,9 +139,15 @@ public class RegisterPersenter extends BasePresenter<Contract.View> implements C
             @Override
             public void success(BaseBean<LoginMoudule> t) {
                 mRootView.hideLoading();
-                BaseApplication.getInstance().getEnv().appPreferencesHelper().setToken(t.getBody().getToken());
+                spHelper.setToken(t.getBody().token);
+                mRootView.saveEntry(t.getBody());
                 mRootView.showToast("已经存入token:" + spHelper.getToken());
             }
         });
+    }
+
+    @Override
+    public void clickClearToken() {
+        spHelper.setToken("111");
     }
 }

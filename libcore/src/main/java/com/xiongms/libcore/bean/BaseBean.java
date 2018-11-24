@@ -4,7 +4,7 @@ package com.xiongms.libcore.bean;
  * Created by cygrove on 2018/11/15.
  */
 
-public class BaseBean<T> {
+public class BaseBean<T> extends BaseEntity {
     private T body;
     private String code;
     private String message;

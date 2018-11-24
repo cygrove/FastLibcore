@@ -8,8 +8,9 @@ import java.util.List;
 
 /**
  * activity管理工具
- * @author xiongms
- * @time 2018-08-16 11:14
+ *
+ * @author cygrove
+ * @time 2018-11-16 11:14
  */
 public class ActivityUtil {
 
@@ -94,7 +95,7 @@ public class ActivityUtil {
         synchronized (activityList) {
             for (int i = 0; i < activityList.size(); i++) {
                 Activity activity = activityList.get(i);
-                if(clazz.isInstance(activity)) {
+                if (clazz.isInstance(activity)) {
                     activityList.remove(activity);
                     i--;
                     if (activity != null) {
@@ -109,13 +110,12 @@ public class ActivityUtil {
 
     /**
      * 结束指定Activity
-     *
      */
     public boolean isContainActivity(Class clazz) {
         synchronized (activityList) {
             for (int i = 0; i < activityList.size(); i++) {
                 Activity activity = activityList.get(i);
-                if(clazz.isInstance(activity)) {
+                if (clazz.isInstance(activity)) {
                     return true;
                 }
             }
@@ -130,7 +130,7 @@ public class ActivityUtil {
         synchronized (activityList) {
             for (int i = 0; i < activityList.size(); i++) {
                 Activity activity1 = activityList.get(i);
-                if(!(activity1.getClass().equals(cls))) {
+                if (!(activity1.getClass().equals(cls))) {
                     activityList.remove(activity1);
                     i--;
                     if (activity1 != null) {

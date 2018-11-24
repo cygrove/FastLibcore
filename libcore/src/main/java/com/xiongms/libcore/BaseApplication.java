@@ -15,20 +15,9 @@ import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
-import com.scwang.smartrefresh.layout.api.RefreshFooter;
-import com.scwang.smartrefresh.layout.api.RefreshHeader;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
-import com.scwang.smartrefresh.layout.footer.FalsifyFooter;
-import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.scwang.smartrefresh.layout.header.FalsifyHeader;
-import com.xiongms.libcore.bean.User;
 import com.xiongms.libcore.config.AppConfig;
-import com.xiongms.libcore.enums.EventBusTypeEnum;
 import com.xiongms.libcore.env.Environment;
 import com.xiongms.libcore.glide.GlideLoader;
 import com.xiongms.libcore.utils.FileUtil;
@@ -36,14 +25,12 @@ import com.xiongms.libcore.utils.LoadViewHelper;
 import com.xiongms.libcore.utils.ResourcesUtil;
 import com.xiongms.libcore.utils.ToastUtil;
 
-import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
-import pl.droidsonroids.gif.GifImageView;
 
 /**
  * @author cygrove
@@ -115,10 +102,6 @@ public abstract class BaseApplication extends Application implements HasActivity
         return mEnv.gson();
     }
 
-    public User getUser() {
-        return mEnv.appPreferencesHelper().getUser();
-    }
-
     public Context getContext() {
         return mApplication.getApplicationContext();
     }
@@ -188,7 +171,6 @@ public abstract class BaseApplication extends Application implements HasActivity
 
                 if (refCount == 0) {
                     mIsBackToForeground = true;
-                    EventBus.getDefault().post(EventBusTypeEnum.REFRESH_STORE_DATA);
                 } else {
                     mIsBackToForeground = false;
                 }

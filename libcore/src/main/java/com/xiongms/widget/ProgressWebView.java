@@ -24,7 +24,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.xiongms.libcore.R;
-import com.xiongms.libcore.utils.ViewUtil;
+import com.xiongms.libcore.utils.ResourcesUtil;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -119,7 +119,7 @@ public class ProgressWebView extends WebView {
 
         this.mContext = context;
         progressView = new View(context);
-        params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int) ViewUtil.dip2px(context, 2), -1, 0);
+        params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int) ResourcesUtil.dip2px(2), -1, 0);
         progressView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
         progressView.setLayoutParams(params);
         WindowManager wm = (WindowManager) context.getSystemService(context.WINDOW_SERVICE);

@@ -3,9 +3,8 @@ package com.xiongms.libcore.mvp;
 import android.app.Activity;
 
 /**
- * 
- * @author xiongms
- * @time 2018-08-17 14:40
+ * @author cygrove
+ * @time 2018-11-17 14:40
  */
 public interface IPresenter<V> {
 

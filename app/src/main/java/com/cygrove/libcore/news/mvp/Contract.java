@@ -16,7 +16,7 @@ public interface Contract {
     }
 
     interface Persenter extends IPresenter<View> {
-        void reqData();
+        void reqData(boolean isShowLoadding);
 
         void refreshData();
 
