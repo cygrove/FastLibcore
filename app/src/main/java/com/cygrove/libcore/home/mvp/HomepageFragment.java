@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.cygrove.libcore.R;
 import com.xiongms.libcore.base.BaseFragment;
-import com.xiongms.widget.datetimepicker.DateTimePicker;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -59,29 +58,5 @@ public class HomepageFragment extends BaseFragment implements Contract.View {
 
     @OnClick(R.id.text)
     public void onViewClicked() {
-        Date endDate = new Date();
-        Calendar c = new GregorianCalendar();
-        c.add(Calendar.YEAR, -1);
-
-        DateTimePicker dateTimePicker = new DateTimePicker.Builder(getContext())
-                .setCancelTextColor(getResources().getColor(R.color.text_black))
-                .setOkTextColor(getResources().getColor(R.color.text_gold))
-                .setTitleTextColor(getResources().getColor(R.color.text_gray))
-                .setTextColor(getResources().getColor(R.color.text_gray))
-                .setSelectedTextColor(getResources().getColor(R.color.text_black))
-                .setDividerColor(getResources().getColor(R.color.line_color))
-                .setDividerWidth(2f)
-                .setKeepLastSelected(true)
-                .setShowYMDHMLabel(false)
-                .setTextSize(getResources().getDimensionPixelSize(R.dimen.text_30px),
-                        getResources().getDimensionPixelSize(R.dimen.text_30px))
-                .setShowType(DateTimePicker.ShowType.WEEK)
-                .setStartDate(c.getTime())
-                .setEndDate(endDate)
-                .build();
-        dateTimePicker.setResultHandler(date -> {
-        });
-
-        dateTimePicker.show(c.getTime());
     }
 }

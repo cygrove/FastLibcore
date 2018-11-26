@@ -76,7 +76,7 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPersenter> impleme
         titleView.setTitle("Demo");
         titleView.setMenuImgIcon(R.drawable.ic_plus);
         titleView.setMenuImgClickListener(view -> showToast("onclickMenu"));
-        StatusBarHelper.setStatusBarColor(this, ResourcesUtil.getColor(R.color.text_green));
+       StatusBarHelper .setStatusBarColor(this, ResourcesUtil.getColor(R.color.text_green));
         requestPermissions();
     }
 
