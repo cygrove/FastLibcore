@@ -23,12 +23,12 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField "String", "FILE_PROVIDER", "\"" + "com.xiongms.libcore.provider" + "\""
+            buildConfigField "String", "FILE_PROVIDER", "\"" + "com.cygrove.libcore.provider" + "\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
-            buildConfigField "String", "FILE_PROVIDER", "\"" + "com.xiongms.libcore.provider" + "\""
+            buildConfigField "String", "FILE_PROVIDER", "\"" + "com.cygrove.libcore.provider" + "\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -134,7 +134,7 @@ dependencies {
     // 权限请求
     api 'pub.devrel:easypermissions:1.0.1'
     // 状态栏助手
-    api 'com.github.xiongms:StatusBarHelper:1.0'
+    api 'com.github.cygrove:smartStatusbar:v1.0'
     // 下拉刷新上拉更多
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.30"

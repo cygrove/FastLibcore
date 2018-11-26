@@ -11,9 +11,6 @@ import com.xiongms.libcore.BaseApplication;
  * Toast工具类 创建通用Toast
  */
 public class ToastUtil {
-
-    private static final String TAG = "ToastUtil1";
-
     private static Toast mToast = null;
 
     /**
@@ -27,7 +24,6 @@ public class ToastUtil {
 
     public static void show(String text) {
         if (mToast == null) {
-            Log.w(TAG, "mToast is null");
             return;
         }
 

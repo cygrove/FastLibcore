@@ -15,10 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xiongms.libcore.R;
+import com.xiongms.libcore.utils.DateUtil;
+import com.xiongms.libcore.utils.WeekUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 
 /**
@@ -47,7 +51,8 @@ public class DateTimePicker {
         MONTH(1),//显示年、月
         DAY(2),//显示年、月、日
         HOUR(3),//显示年、月、日、时
-        MINUTE(4);//显示年、月、日、时、分
+        MINUTE(4),//显示年、月、日、时、分
+        WEEK(5);//显示年、周
 
         ShowType(int value) {
             this.value = value;
@@ -63,8 +68,8 @@ public class DateTimePicker {
     private FrameLayout fyHeader;
     private View lyBody;
     private View segmentLineView;
-    private DatePickerView yearPicker, monthPicker, dayPicker, hourPicker, minutePicker;
-    private TextView btnCancel, tvTitle, btnOK, yearLabel, monthLabel, dayLabel, hourLabel, minuteLabel;
+    private DatePickerView yearPicker, monthPicker, dayPicker, hourPicker, minutePicker, weekPicker;
+    private TextView btnCancel, tvTitle, btnOK, yearLabel, monthLabel, dayLabel, hourLabel, minuteLabel, weekLabel;
 
     private static final int MAX_MINUTE = 59;
     private static final int MAX_HOUR = 23;
@@ -72,7 +77,7 @@ public class DateTimePicker {
     private static final int MIN_HOUR = 0;
     private static final int MAX_MONTH = 12;
 
-    private ArrayList<String> years, months, days, hours, minutes;
+    private ArrayList<String> years, months, days, hours, minutes, weeks;
     private int startYear, startMonth, startDay, startHour, startMinute, endYear, endMonth, endDay, endHour, endMinute;
     private Calendar selectedCalender, startCalendar, endCalendar;
     private ShowType curShowType;//显示级别
@@ -124,6 +129,7 @@ public class DateTimePicker {
         dayPicker = datePickerDialog.findViewById(R.id.day_picker);
         hourPicker = datePickerDialog.findViewById(R.id.hour_picker);
         minutePicker = datePickerDialog.findViewById(R.id.minute_picker);
+        weekPicker = datePickerDialog.findViewById(R.id.week_picker);
         btnCancel = datePickerDialog.findViewById(R.id.btn_cancel);
         tvTitle = datePickerDialog.findViewById(R.id.tv_title);
         btnOK = datePickerDialog.findViewById(R.id.btn_ok);
@@ -132,21 +138,13 @@ public class DateTimePicker {
         dayLabel = datePickerDialog.findViewById(R.id.day_label);
         hourLabel = datePickerDialog.findViewById(R.id.hour_label);
         minuteLabel = datePickerDialog.findViewById(R.id.minute_label);
+        weekLabel = datePickerDialog.findViewById(R.id.week_label);
+        btnCancel.setOnClickListener(view -> datePickerDialog.dismiss());
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                datePickerDialog.dismiss();
-            }
-        });
-
-        btnOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (handler != null)
-                    handler.handle(selectedCalender.getTime());
-                datePickerDialog.dismiss();
-            }
+        btnOK.setOnClickListener(view -> {
+            if (handler != null)
+                handler.handle(selectedCalender.getTime());
+            datePickerDialog.dismiss();
         });
     }
 
@@ -164,18 +162,21 @@ public class DateTimePicker {
         dayPicker.setColors(builder.textColor, builder.selectedTextColor);
         hourPicker.setColors(builder.textColor, builder.selectedTextColor);
         minutePicker.setColors(builder.textColor, builder.selectedTextColor);
+        weekPicker.setColors(builder.textColor, builder.selectedTextColor);
         //
         yearPicker.setTextSize(builder.maxTextSize, builder.minTextSize);
         monthPicker.setTextSize(builder.maxTextSize, builder.minTextSize);
         dayPicker.setTextSize(builder.maxTextSize, builder.minTextSize);
         hourPicker.setTextSize(builder.maxTextSize, builder.minTextSize);
         minutePicker.setTextSize(builder.maxTextSize, builder.minTextSize);
+        weekPicker.setTextSize(builder.maxTextSize, builder.minTextSize);
         //
         yearPicker.setDivider(builder.dividerColor, builder.dividerWidth);
         monthPicker.setDivider(builder.dividerColor, builder.dividerWidth);
         dayPicker.setDivider(builder.dividerColor, builder.dividerWidth);
         hourPicker.setDivider(builder.dividerColor, builder.dividerWidth);
         minutePicker.setDivider(builder.dividerColor, builder.dividerWidth);
+        weekPicker.setDivider(builder.dividerColor, builder.dividerWidth);
         //
         btnCancel.setText(builder.cancel);
         tvTitle.setText(builder.title);
@@ -243,7 +244,29 @@ public class DateTimePicker {
         for (int i = startMinute; i <= MAX_MINUTE; i++) {
             minutes.add(formatTimeUnit(i));
         }
+        //weeks
+        if (curShowType.value >= ShowType.WEEK.value) {
+            weeks.addAll(getWeekList(startYear + ""));
+        }
         loadComponent();
+    }
+
+    private List<String> getWeekList(String year) {
+        int weeks;
+        String currentYear = String.valueOf(DateUtil.getCurrentDate("YYYY"));
+        if (year.equals(currentYear)) {
+            weeks = WeekUtil.getWeekOfYear(new Date());
+        } else {
+            weeks = WeekUtil.getMaxWeekNumOfYear(Integer.parseInt(year));
+        }
+        List<String> week = new ArrayList<>();
+        Date today = new Date();
+        Calendar c = new GregorianCalendar();
+        c.setTime(today);
+        for (int i = 0; i < weeks; i++) {
+            week.add((i + 1) + "");
+        }
+        return week;
     }
 
     /**
@@ -259,11 +282,13 @@ public class DateTimePicker {
         if (days == null) days = new ArrayList<>();
         if (hours == null) hours = new ArrayList<>();
         if (minutes == null) minutes = new ArrayList<>();
+        if (weeks == null) weeks = new ArrayList<>();
         years.clear();
         months.clear();
         days.clear();
         hours.clear();
         minutes.clear();
+        weeks.clear();
     }
 
     private int findSelectedItemIndex(ShowType type, String value) {
@@ -344,44 +369,31 @@ public class DateTimePicker {
     }
 
     private void addListener() {
-        yearPicker.setOnSelectListener(new DatePickerView.onSelectListener() {
-            @Override
-            public void onSelect(String text) {
-                selectedCalender.set(Calendar.YEAR, Integer.parseInt(text));
-                monthChange();
-            }
+        yearPicker.setOnSelectListener(text -> {
+            selectedCalender.set(Calendar.YEAR, Integer.parseInt(text));
+            monthChange();
         });
 
-        monthPicker.setOnSelectListener(new DatePickerView.onSelectListener() {
-            @Override
-            public void onSelect(String text) {
-                selectedCalender.set(Calendar.DAY_OF_MONTH, 1);
-                selectedCalender.set(Calendar.MONTH, Integer.parseInt(text) - 1);
-                dayChange();
-            }
+        monthPicker.setOnSelectListener(text -> {
+            selectedCalender.set(Calendar.DAY_OF_MONTH, 1);
+            selectedCalender.set(Calendar.MONTH, Integer.parseInt(text) - 1);
+            dayChange();
         });
 
-        dayPicker.setOnSelectListener(new DatePickerView.onSelectListener() {
-            @Override
-            public void onSelect(String text) {
-                selectedCalender.set(Calendar.DAY_OF_MONTH, Integer.parseInt(text));
-                hourChange();
-            }
+        dayPicker.setOnSelectListener(text -> {
+            selectedCalender.set(Calendar.DAY_OF_MONTH, Integer.parseInt(text));
+            hourChange();
         });
 
-        hourPicker.setOnSelectListener(new DatePickerView.onSelectListener() {
-            @Override
-            public void onSelect(String text) {
-                selectedCalender.set(Calendar.HOUR_OF_DAY, Integer.parseInt(text));
-                minuteChange();
-            }
+        hourPicker.setOnSelectListener(text -> {
+            selectedCalender.set(Calendar.HOUR_OF_DAY, Integer.parseInt(text));
+            minuteChange();
         });
 
-        minutePicker.setOnSelectListener(new DatePickerView.onSelectListener() {
-            @Override
-            public void onSelect(String text) {
-                selectedCalender.set(Calendar.MINUTE, Integer.parseInt(text));
-            }
+        minutePicker.setOnSelectListener(text -> selectedCalender.set(Calendar.MINUTE, Integer.parseInt(text)));
+        weekPicker.setOnSelectListener(text -> {
+            selectedCalender.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(text));
+            weekChange();
         });
     }
 
@@ -590,6 +602,13 @@ public class DateTimePicker {
         executeScroll();
     }
 
+    private void weekChange() {
+        weeks.clear();
+        weeks.addAll(getWeekList(selectedCalender.get(Calendar.YEAR) + ""));
+        weekPicker.setData(weeks);
+        executeAnimator(weekPicker);
+    }
+
     /**
      * 设置数据时，view发生抖动
      *
@@ -608,6 +627,7 @@ public class DateTimePicker {
         dayPicker.setCanScroll(days.size() > 1);
         hourPicker.setCanScroll(hours.size() > 1);
         minutePicker.setCanScroll(minutes.size() > 1);
+        weekPicker.setCanScroll(weeks.size() > 1);
     }
 
     public void show(Date time) {
@@ -689,6 +709,18 @@ public class DateTimePicker {
                 dayLabel.setVisibility(showYMDHMLabel ? View.VISIBLE : View.GONE);
                 hourLabel.setVisibility(showYMDHMLabel ? View.VISIBLE : View.GONE);
                 minuteLabel.setVisibility(showYMDHMLabel ? View.VISIBLE : View.GONE);
+                break;
+            case WEEK:
+                yearLabel.setVisibility(showYMDHMLabel ? View.VISIBLE : View.GONE);
+                monthLabel.setVisibility(showYMDHMLabel ? View.VISIBLE : View.GONE);
+                dayLabel.setVisibility(showYMDHMLabel ? View.VISIBLE : View.GONE);
+                hourLabel.setVisibility(showYMDHMLabel ? View.VISIBLE : View.GONE);
+                minuteLabel.setVisibility(showYMDHMLabel ? View.VISIBLE : View.GONE);
+                yearPicker.setVisibility(View.VISIBLE);
+                monthPicker.setVisibility(View.GONE);
+                dayPicker.setVisibility(View.GONE);
+                hourPicker.setVisibility(View.GONE);
+                minutePicker.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -823,7 +855,14 @@ public class DateTimePicker {
             selectedCalender.set(Calendar.MINUTE, mm);
             executeAnimator(minutePicker);
         }
+        //week
+        if (curShowType.value >= ShowType.WEEK.value) {
+            minutes.clear();
+            minutes.addAll(getWeekList(startYear + ""));
 
+            minutePicker.setData(minutes);
+            executeAnimator(minutePicker);
+        }
         executeScroll();
     }
 
@@ -837,6 +876,7 @@ public class DateTimePicker {
         CharSequence day;
         CharSequence hour;
         CharSequence minute;
+        CharSequence week;
         Date startDate;
         Date endDate;
         int titleTextColor;
@@ -872,6 +912,7 @@ public class DateTimePicker {
             day = context.getString(R.string.day);
             hour = context.getString(R.string.hour);
             minute = context.getString(R.string.minute);
+            week = context.getString(R.string.week);
             titleTextColor = 0xFF333333;
             cancelTextColor = 0xFF333333;
             okTextColor = 0xFF333333;
@@ -935,6 +976,11 @@ public class DateTimePicker {
 
         public Builder setMinute(CharSequence minute) {
             this.minute = minute;
+            return this;
+        }
+
+        public Builder setWeek(CharSequence week) {
+            this.week = week;
             return this;
         }
 

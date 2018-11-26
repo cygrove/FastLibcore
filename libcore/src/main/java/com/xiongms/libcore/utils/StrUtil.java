@@ -16,6 +16,9 @@
 
 package com.xiongms.libcore.utils;
 
+import android.text.InputFilter;
+import android.widget.EditText;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -673,4 +676,39 @@ public class StrUtil {
         return 0;
     }
 
+    /**
+     * 禁止EditText输入空格和汉字
+     *
+     * @param editText
+     */
+    public static void setEditTextInhibitInputSpace(EditText editText, int maxLength) {
+        InputFilter filter = (source, start, end, dest, dstart, dend) -> {
+            String speChat = "[\\u4e00-\\u9fa5]";
+            Pattern pattern = Pattern.compile(speChat);
+            Matcher matcher = pattern.matcher(source.toString());
+            if (source.equals(" ") || matcher.find()) {
+                return "";
+            } else {
+                return null;
+            }
+        };
+        InputFilter.LengthFilter lengthFilter = new InputFilter.LengthFilter(maxLength);
+        editText.setFilters(new InputFilter[]{filter, lengthFilter});
+    }
+
+    /**
+     * 禁止EditText输入空格
+     *
+     * @param editText
+     */
+    public static void setEditTextInhibitInputSpace(EditText editText) {
+        InputFilter filter = (source, start, end, dest, dstart, dend) -> {
+            if (source.equals(" ")) {
+                return "";
+            } else {
+                return null;
+            }
+        };
+        editText.setFilters(new InputFilter[]{filter});
+    }
 }

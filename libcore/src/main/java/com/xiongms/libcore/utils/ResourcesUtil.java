@@ -19,16 +19,6 @@ import com.orhanobut.logger.Logger;
 
 import java.io.InputStream;
 
-/**
- * ©2016 兴手付
- *
- * @功能描述:代码里获取UI资源的统一入口
- * @作者: yfc
- * @创建时间: 2016年10月26日
- * @修改人:
- * @修改描述:
- * @修改日期:
- */
 public class ResourcesUtil {
     public static final String TAG = "ResourcesUtil";
     // init on advert application

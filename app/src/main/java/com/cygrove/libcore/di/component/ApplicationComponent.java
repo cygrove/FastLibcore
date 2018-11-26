@@ -1,9 +1,9 @@
 package com.cygrove.libcore.di.component;
 
 import com.cygrove.libcore.AppApplication;
+import com.cygrove.libcore.home.di.HomepageActivityModule;
 import com.cygrove.libcore.main.di.module.MainActivitysModule;
 import com.cygrove.libcore.news.di.NewsActivityModule;
-import com.cygrove.libcore.news.mvp.NewsActivity;
 import com.cygrove.libcore.register.moudule.RegisterActivityModule;
 import com.xiongms.libcore.di.module.ApplicationModule;
 import com.xiongms.libcore.di.module.GlobalConfigModule;
@@ -30,7 +30,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
         NetModule.class,
         MainActivitysModule.class,
         RegisterActivityModule.class,
-        NewsActivityModule.class})
+        NewsActivityModule.class,
+        HomepageActivityModule.class
+})
 
 public interface ApplicationComponent {
     void inject(AppApplication application);

@@ -10,18 +10,18 @@ import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cygrove.libcore.R;
+import com.cygrove.libcore.home.mvp.HomepageActivity;
 import com.cygrove.libcore.news.mvp.NewsActivity;
 import com.cygrove.libcore.register.contract.Contract;
 import com.cygrove.libcore.register.moudule.LoginMoudule;
 import com.cygrove.libcore.register.persenter.RegisterPersenter;
+import com.orhanobut.logger.Logger;
 import com.xiongms.libcore.config.RouterConfig;
-import com.xiongms.libcore.base.BaseActivity;
 import com.xiongms.libcore.mvp.BaseMVPActivity;
 import com.xiongms.libcore.utils.ActivityUtil;
 import com.xiongms.libcore.utils.AppPreferencesHelper;
 import com.xiongms.libcore.utils.LoadViewHelper;
 import com.xiongms.libcore.utils.ResourcesUtil;
-import com.xiongms.statusbar.StatusBarHelper;
 import com.xiongms.widget.TitleView;
 
 import java.util.Timer;
@@ -30,9 +30,11 @@ import java.util.TimerTask;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import pub.devrel.easypermissions.EasyPermissions;
+import statusbar.cygrove.com.statusbarhelper.StatusBarHelper;
 
 @Route(path = RouterConfig.ROUTER_LOGIN)
 public class RegisterActivity extends BaseMVPActivity<RegisterPersenter> implements Contract.View {
@@ -56,6 +58,8 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPersenter> impleme
     Button btnClearToken;
     @Inject
     public AppPreferencesHelper spHelper;
+    @BindView(R.id.btn_jump1)
+    Button btnJump1;
     private boolean isTokenError;
     private Observable timer;
 
@@ -117,11 +121,11 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPersenter> impleme
     public void saveEntry(LoginMoudule moudule) {
         spHelper.saveModel(moudule);
         LoginMoudule moud = spHelper.getModel(LoginMoudule.class);
-        com.orhanobut.logger.Logger.d(moud);
+        Logger.d(moud);
     }
 
 
-    @OnClick({R.id.btn_send, R.id.btn_next, R.id.btn_cheak_new_version, R.id.btn_get_token, R.id.btn_jump, R.id.btn_clear_token})
+    @OnClick({R.id.btn_send, R.id.btn_next, R.id.btn_cheak_new_version, R.id.btn_get_token, R.id.btn_jump, R.id.btn_clear_token, R.id.btn_jump1})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
@@ -142,6 +146,9 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPersenter> impleme
             case R.id.btn_clear_token:
                 mPresenter.clickClearToken();
                 break;
+            case R.id.btn_jump1:
+                push(HomepageActivity.class);
+                break;
         }
     }
 
@@ -160,4 +167,6 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPersenter> impleme
             EasyPermissions.requestPermissions(this, "为保证APP正常使用，请允许存储、相机等权限", 101, perms);
         }
     }
+
+
 }

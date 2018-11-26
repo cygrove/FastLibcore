@@ -1,7 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xiongms.libcore">
 
-
     <uses-permission android:name="android.permission.CAMERA" />
     <!--android.permission.FLASHLIGHT允许访问闪光灯的权限-->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
@@ -40,7 +39,7 @@
         <service android:name=".download.DownloadService" />
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.xiongms.libcore.provider"
+            android:authorities="com.cygrove.libcore.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

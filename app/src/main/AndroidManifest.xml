@@ -21,6 +21,8 @@
         </activity>
         <activity
             android:name=".news.mvp.NewsActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity android:name=".home.mvp.HomepageActivity"></activity>
     </application>
+
 </manifest>

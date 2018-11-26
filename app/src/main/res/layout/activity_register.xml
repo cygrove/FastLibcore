@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="获取token" />
+
         <Button
             android:id="@+id/btn_clear_token"
             android:layout_width="wrap_content"
@@ -63,5 +64,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="跳转" />
+
+        <Button
+            android:id="@+id/btn_jump1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="跳转1" />
     </LinearLayout>
 </LinearLayout>
