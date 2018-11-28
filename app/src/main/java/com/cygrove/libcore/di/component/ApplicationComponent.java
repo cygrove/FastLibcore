@@ -4,6 +4,7 @@ import com.cygrove.libcore.AppApplication;
 import com.cygrove.libcore.home.di.HomepageActivityModule;
 import com.cygrove.libcore.main.di.module.MainActivitysModule;
 import com.cygrove.libcore.news.di.NewsActivityModule;
+import com.cygrove.libcore.qrcode.di.ScanActivityModule;
 import com.cygrove.libcore.register.moudule.RegisterActivityModule;
 import com.xiongms.libcore.di.module.ApplicationModule;
 import com.xiongms.libcore.di.module.GlobalConfigModule;
@@ -16,7 +17,7 @@ import dagger.android.AndroidInjectionModule;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 /**
- * @author xiongms
+ * @author cygrove
  * @time 2018-11-07 16:12
  */
 @Singleton
@@ -31,7 +32,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
         MainActivitysModule.class,
         RegisterActivityModule.class,
         NewsActivityModule.class,
-        HomepageActivityModule.class
+        HomepageActivityModule.class,
+        ScanActivityModule.class
 })
 
 public interface ApplicationComponent {

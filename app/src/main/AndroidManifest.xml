@@ -22,7 +22,8 @@
         <activity
             android:name=".news.mvp.NewsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".home.mvp.HomepageActivity"></activity>
+        <activity android:name=".home.mvp.HomepageActivity" />
+        <activity android:name=".qrcode.mvp.ScanActivity"></activity>
     </application>
 
 </manifest>

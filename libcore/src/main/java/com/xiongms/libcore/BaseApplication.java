@@ -69,7 +69,6 @@ public abstract class BaseApplication extends Application implements HasActivity
     public void onCreate() {
         super.onCreate();
         mApplication = this;
-
         initDaggerComponent();
         init();
     }
@@ -80,10 +79,10 @@ public abstract class BaseApplication extends Application implements HasActivity
     }
 
     public void init() {
+        initLogger();
         ResourcesUtil.init(getResources());
         // 部分机型中兼容vector图片
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-        initLogger();
         initArouter();
         initRefreshLayout();
         initLoadingHelper();
@@ -115,7 +114,7 @@ public abstract class BaseApplication extends Application implements HasActivity
         //设置全局的Footer构建器
         SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) -> {
             //指定为经典Footer，默认是 BallPulseFooter
-            return new ClassicsFooter(context).setDrawableSize(10);
+            return new ClassicsFooter(context).setDrawableSize(10f).setFinishDuration(150);
         });
     }
 

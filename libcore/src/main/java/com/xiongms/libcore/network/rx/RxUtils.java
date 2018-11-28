@@ -108,9 +108,9 @@ public class RxUtils {
 
 
     public static Observable tokenError() {
+        ActivityUtil.getInstance().clearAllActivity();
         ARouter.getInstance().build(RouterConfig.ROUTER_LOGIN)
                 .withBoolean("TokenError", true)
-                .withTransition(R.anim.activity_in_right, R.anim.activity_out_right)
                 .navigation(ActivityUtil.getInstance().getCurrentActivity());
         return PublishSubject.create();
     }

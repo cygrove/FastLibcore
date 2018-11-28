@@ -169,17 +169,17 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IView,
      *
      * @param to
      */
-    protected void push(Class<? extends BaseActivity> to) {
+    public void push(Class<? extends BaseActivity> to) {
         Intent intent = new Intent(getContext(), to);
         startActivity(intent);
     }
 
-    protected void pushExtra(Class<? extends BaseActivity> to, Intent intent) {
+    public void pushExtra(Class<? extends BaseActivity> to, Intent intent) {
         intent.setClass(getContext(), to);
         startActivity(intent);
     }
 
-    protected void pushExtraForResult(Class<? extends BaseActivity> to, Intent intent, int requestCode) {
+    public void pushExtraForResult(Class<? extends BaseActivity> to, Intent intent, int requestCode) {
         intent.setClass(getContext(), to);
         startActivityForResult(intent, requestCode);
     }

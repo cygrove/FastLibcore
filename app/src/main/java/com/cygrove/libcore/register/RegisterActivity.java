@@ -71,29 +71,14 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPersenter> impleme
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        isTokenError = getIntent().getBooleanExtra("TokenError", false);
         mPresenter.onAttach(this);
         titleView.setTitle("Demo");
         titleView.setMenuImgIcon(R.drawable.ic_plus);
         titleView.setMenuImgClickListener(view -> showToast("onclickMenu"));
-       StatusBarHelper .setStatusBarColor(this, ResourcesUtil.getColor(R.color.text_green));
+        StatusBarHelper.setStatusBarColor(this, ResourcesUtil.getColor(R.color.text_green));
         requestPermissions();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (isTokenError) {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    ActivityUtil.getInstance().clearAllActivityWithout(RegisterActivity.class);
-                }
-            }, 1000);
-//
-        }
-    }
 
     @Override
     public String getPhone() {

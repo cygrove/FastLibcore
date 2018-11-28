@@ -10,11 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cygrove.libcore.R;
+import com.cygrove.libcore.qrcode.mvp.ScanActivity;
 import com.xiongms.libcore.base.BaseFragment;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import com.xiongms.widget.PickerHelper;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -58,5 +56,27 @@ public class HomepageFragment extends BaseFragment implements Contract.View {
 
     @OnClick(R.id.text)
     public void onViewClicked() {
+        String s = getArguments().getString("tab");
+        switch (s) {
+            case "0":
+                HomepageActivity activity = (HomepageActivity) mActivity;
+                activity.push(ScanActivity.class);
+                break;
+            case "1":
+                break;
+            case "2":
+                break;
+            case "3":
+                PickerHelper helper = new PickerHelper();
+                String weeks[] = new String[]{"2017", "2018"};
+                helper.showWeekPicker(mActivity, weeks, "周周", true, new PickerHelper.OnSelectListener() {
+                    @Override
+                    public void onSelect(String options1, String options2, String options3) {
+                        showToast(options1 + options2 + options3);
+                    }
+                });
+                break;
+        }
+
     }
 }

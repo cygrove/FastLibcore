@@ -5,7 +5,6 @@ package com.xiongms.libcore.network.exception;
  * @time 2018-11-14 11:56
  */
 public class ExceptionCont {
-
     /**
      * 登录无效
      */

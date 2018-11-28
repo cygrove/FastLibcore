@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2012 www.amsoft.cn
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,7 +25,6 @@ import java.util.GregorianCalendar;
 // TODO: Auto-generated Javadoc
 
 /**
- * 
  * @author xiongms
  * @time 2018-08-27 11:29
  */
@@ -239,7 +238,7 @@ public class DateUtil {
     public static String getStringByFormat(String strDate, String format) {
         String mDateTime = null;
         try {
-            if(strDate != null && strDate.length() > 0) {
+            if (strDate != null && strDate.length() > 0) {
                 Calendar c = new GregorianCalendar();
                 c.setTime(getDate(strDate));
                 SimpleDateFormat mSimpleDateFormat2 = new SimpleDateFormat(format);
@@ -280,6 +279,25 @@ public class DateUtil {
         try {
             SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat(format);
             Calendar c = new GregorianCalendar();
+            curDateTime = mSimpleDateFormat.format(c.getTime());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return curDateTime;
+
+    }
+
+    /**
+     * 获取去年
+     *
+     * @return
+     */
+    public static String getLastYear() {
+        String curDateTime = null;
+        try {
+            SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("YYYY");
+            Calendar c = new GregorianCalendar();
+            c.add(Calendar.YEAR, -1);
             curDateTime = mSimpleDateFormat.format(c.getTime());
         } catch (Exception e) {
             e.printStackTrace();
@@ -542,7 +560,7 @@ public class DateUtil {
         Calendar c2 = Calendar.getInstance();
         try {
             c2.setTime(date);
-            if(timeFilter) {
+            if (timeFilter) {
                 c1.setTime(new Date());
                 int d = getOffectDay(c1.getTimeInMillis(), c2.getTimeInMillis());
                 if (d == 0) {

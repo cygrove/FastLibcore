@@ -5,11 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.bumptech.glide.gifdecoder.GifHeader;
 import com.cygrove.libcore.R;
 import com.cygrove.libcore.adapter.NewsAdapter;
 import com.cygrove.libcore.news.bean.NewsEntry;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.xiongms.libcore.base.BaseActivity;
+import com.scwang.smartrefresh.layout.util.DensityUtil;
 import com.xiongms.libcore.mvp.BaseMVPActivity;
 import com.xiongms.libcore.utils.LoadViewHelper;
 import com.xiongms.widget.TitleView;
@@ -35,6 +36,7 @@ public class NewsActivity extends BaseMVPActivity<NewPersenter> implements Contr
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         title.setTitle("列表");
+        refreshLayout.setHeaderInsetStart(DensityUtil.px2dp(title.getHeight()));
         refreshLayout.setEnableFooterFollowWhenLoadFinished(true);
         refreshLayout.setOnRefreshListener(refreshLayout -> mPresenter.refreshData());
         refreshLayout.setOnLoadMoreListener(refreshLayout -> mPresenter.loadmoreData());

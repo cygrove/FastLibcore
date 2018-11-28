@@ -9,15 +9,13 @@ import okhttp3.Response;
 /**
  * 全局处理Http请求和响应
  *
- * @author xiongms
+ * @author cygrove
  * @time 2018-11-08 13:41
  */
 public interface GlobalHttpHandler {
-
     Response onHttpResultResponse(String httpResult, Interceptor.Chain chain, Response response) throws IOException;
 
     Request onHttpRequestBefore(Interceptor.Chain chain, Request request) throws IOException;
-
 
     //空实现
     GlobalHttpHandler EMPTY = new GlobalHttpHandler() {
