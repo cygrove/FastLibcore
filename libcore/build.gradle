@@ -119,8 +119,9 @@ dependencies {
 
     //QMUI 腾讯团队退出的UI框架
     api 'com.qmuiteam:qmui:1.1.6'
-    //PickerView
+    //PickerView轮子可以自定义
     api 'com.contrarywind:Android-PickerView:4.1.6'
+    api 'com.contrarywind:wheelview:4.0.8'
     // eventbus
     api 'org.greenrobot:eventbus:3.1.0-RC'
 
