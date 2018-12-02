@@ -130,7 +130,7 @@ public class SecretUtil {
         return sortList;
     }
 
-    public static String getDesSecret(String s) {
-        return SecretUtil.encrypt(s, DesUtil.secretConstant);
+    public static String getDesSecret(String s, String desKey) {
+        return SecretUtil.encrypt(s, desKey);
     }
 }

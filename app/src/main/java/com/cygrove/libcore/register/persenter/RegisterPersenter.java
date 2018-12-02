@@ -122,7 +122,7 @@ public class RegisterPersenter extends BasePresenter<Contract.View> implements C
     public void getToken() {
         JsonObject json = new JsonObject();
         json.addProperty("pushId", "1507bfd3f790d00c477");
-        json.addProperty("pwd", SecretUtil.getDesSecret("111111"));
+        json.addProperty("pwd", SecretUtil.getDesSecret("111111", "bx#x@iwH"));
         json.addProperty("account", "15123130833");
         RxResultHelper.getHttpObservable(mRootView.getContext(), loginApi.getToken(json)).subscribe(new RxResultSubscriber<LoginMoudule>() {
             @Override

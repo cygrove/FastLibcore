@@ -7,7 +7,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class DesUtil {
-    public static String secretConstant = "bx#x@iwH";//约定公钥
     private static byte[] iv = {
             1,
             2,
@@ -37,21 +36,6 @@ public class DesUtil {
         return Base64.encode(encryptedData);
     }
 
-    /**
-     * 加密逻辑方法
-     *
-     * @param encryptString
-     */
-    public static String encryptDES(String encryptString) throws Exception {
-        // IvParameterSpec zeroIv = new IvParameterSpec(new byte[8]);
-        IvParameterSpec zeroIv = new IvParameterSpec(iv);
-        SecretKeySpec key = new SecretKeySpec(secretConstant.getBytes(), "DES");
-        Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
-        cipher.init(Cipher.ENCRYPT_MODE, key);
-        byte[] encryptedData = cipher.doFinal(encryptString.getBytes());
-
-        return Base64.encode(encryptedData);
-    }
 
     /**
      * 解密逻辑方法
@@ -78,31 +62,6 @@ public class DesUtil {
         return "";
     }
 
-    /**
-     * 解密逻辑方法
-     *
-     * @param decryptString
-     */
-    public static String decryptDES(String decryptString) {
-        if (decryptString == null || decryptString.isEmpty()) {
-            return "";
-        }
-        try {
-            byte[] byteMi = Base64.decode(decryptString);
-            IvParameterSpec zeroIv = new IvParameterSpec(iv);
-            // IvParameterSpec zeroIv = new IvParameterSpec(new byte[8]);
-            SecretKeySpec key = new SecretKeySpec(secretConstant.getBytes(), "DES");
-
-            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
-            cipher.init(Cipher.DECRYPT_MODE, key);
-            byte decryptedData[] = cipher.doFinal(byteMi);
-
-            return new String(decryptedData);
-        } catch (Exception e) {
-            Logger.e(e.getMessage());
-        }
-        return "";
-    }
 
     public static void main(String[] args) throws Exception {
         // String key = "YcV%fcKm";
