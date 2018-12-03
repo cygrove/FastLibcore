@@ -13,8 +13,7 @@
         android:id="@+id/iv_community_bg"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/app_logo" />
+        android:scaleType="centerCrop" />
 
 
     <LinearLayout

@@ -5,11 +5,6 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-/**
- * 
- * @author xiongms
- * @time 2018-08-27 11:34
- */
 public class DoubleUtil {
 
     //默认除法运算精度
@@ -74,7 +69,7 @@ public class DoubleUtil {
 
         int iValue = new Double(arg0).intValue();
 
-        if(iValue == arg0) {
+        if (iValue == arg0) {
             nf.setMinimumFractionDigits(0);
         } else {
             nf.setMinimumFractionDigits(num);
@@ -156,7 +151,7 @@ public class DoubleUtil {
         if (scale < 0) {
             throw new IllegalArgumentException("The scale must be a positive integer or zero");
         }
-        if(v2 == 0) {
+        if (v2 == 0) {
             return 0d;
         }
         BigDecimal b1 = new BigDecimal(Double.toString(v1));

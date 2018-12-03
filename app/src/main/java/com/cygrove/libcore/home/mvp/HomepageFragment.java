@@ -1,5 +1,8 @@
 package com.cygrove.libcore.home.mvp;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -63,6 +66,15 @@ public class HomepageFragment extends BaseFragment implements Contract.View {
                 activity.push(ScanActivity.class);
                 break;
             case "1":
+                AlertDialog dialog = new AlertDialog.Builder(getContext())
+                        .setNegativeButton("取消", (dialogInterface, i) -> {
+
+                        }).setPositiveButton("确定", (dialogInterface, i) -> {
+
+                        }).create();
+                dialog.setTitle("title");
+                dialog.setMessage("message");
+                dialog.show();
                 break;
             case "2":
                 break;

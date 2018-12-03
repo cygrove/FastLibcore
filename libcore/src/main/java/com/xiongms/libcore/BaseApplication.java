@@ -142,10 +142,10 @@ public abstract class BaseApplication extends Application implements HasActivity
      */
     private void initGlideConfig() {
         GlideLoader.getBuilder()
-                .setDefault(R.drawable.app_logo)
-                .setDefaultCircle(R.drawable.app_logo)
-                .setDefaultHead(R.drawable.app_logo)
-                .setDefaultOther(R.drawable.app_logo);
+                .setDefault(R.mipmap.lib_ic_launcher)
+                .setDefaultCircle(R.mipmap.lib_ic_launcher)
+                .setDefaultHead(R.mipmap.lib_ic_launcher)
+                .setDefaultOther(R.mipmap.lib_ic_launcher);
     }
 
     private void initLogger() {

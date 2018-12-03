@@ -22,8 +22,8 @@ import okhttp3.Response;
 /**
  * 下载网络请求
  *
- * @author xiongms
- * @time 2018-09-12 14:36
+ * @author cygrove
+ * @time 2018-11-12 14:36
  */
 public class HttpRequest {
 
@@ -86,36 +86,36 @@ public class HttpRequest {
 
         Request request = new Request.Builder().url(downloadPath).build();
 
-        if(mCurrentCall != null && mCurrentCall.isExecuted()) {
+        if (mCurrentCall != null && mCurrentCall.isExecuted()) {
             mCurrentCall.cancel();
         }
         mCurrentCall = mOkHttpClient.newCall(request);
         mCurrentCall.enqueue(new okhttp3.Callback() {
-                    @Override
-                    public void onFailure(okhttp3.Call call, IOException e) {
-                        Message message = new Message();
-                        message.what = downloadFailure;
-                        message.obj = e.toString();
-                        handler.sendMessage(message);
-                    }
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+                Message message = new Message();
+                message.what = downloadFailure;
+                message.obj = e.toString();
+                handler.sendMessage(message);
+            }
 
-                    @Override
-                    public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
-                        if(response.isSuccessful()
-                                && writeResponseBodyToDisk(response, filePath, fileName)) {
-                            Bundle bundle = new Bundle();
-                            Message message = new Message();
-                            message.what = downloadSuccess;
-                            bundle.putSerializable("file", downloadFile);
-                            message.setData(bundle);
-                            handler.sendMessage(message);
-                        } else {
-                            Message message = new Message();
-                            message.what = downloadFailure;
-                            handler.sendMessage(message);
-                        }
-                    }
-                });
+            @Override
+            public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+                if (response.isSuccessful()
+                        && writeResponseBodyToDisk(response, filePath, fileName)) {
+                    Bundle bundle = new Bundle();
+                    Message message = new Message();
+                    message.what = downloadSuccess;
+                    bundle.putSerializable("file", downloadFile);
+                    message.setData(bundle);
+                    handler.sendMessage(message);
+                } else {
+                    Message message = new Message();
+                    message.what = downloadFailure;
+                    handler.sendMessage(message);
+                }
+            }
+        });
     }
 
     private boolean writeResponseBodyToDisk(okhttp3.Response response, String filePath, String fileName) {

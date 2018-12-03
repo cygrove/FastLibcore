@@ -159,7 +159,7 @@ class InternalDialog extends Dialog implements DownloadCallback {
             intent.putExtra("downloadUrl", mOption.getNewAppUrl());
             intent.putExtra("filePath", mOption.getFilePath());
             intent.putExtra("fileName", "update.apk");
-            intent.putExtra("iconResId", R.drawable.app_logo);
+            intent.putExtra("iconResId", R.mipmap.lib_ic_launcher);
             intent.putExtra("isShowProgress", true);
             intent.putExtra("appName", AppUtil.getAppName(getContext()));
             getContext().startService(intent);

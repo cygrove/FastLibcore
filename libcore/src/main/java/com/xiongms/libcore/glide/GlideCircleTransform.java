@@ -1,6 +1,5 @@
 package com.xiongms.libcore.glide;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
@@ -13,13 +12,13 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import java.security.MessageDigest;
 
 /**
- * 
- * @author xiongms
- * @time 2018-08-17 15:53
+ * @author cygrove
+ * @time 2018-11-14 15:53
  */
 public class GlideCircleTransform extends BitmapTransformation {
 
-    @Override protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
+    @Override
+    protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
         return circleCrop(pool, toTransform);
     }
 

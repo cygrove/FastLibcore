@@ -10,8 +10,8 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import java.io.File;
 
 /**
- * 图片加载器
- * by cy
+ * @author cygrove
+ * @time 2018-11-13 11:29
  */
 public class GlideLoader {
     private volatile static Builder builder = new Builder();
