@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -36,7 +37,7 @@ import dagger.android.HasActivityInjector;
  * @author cygrove
  * @time 2018-11-02 10:38
  */
-public abstract class BaseApplication extends Application implements HasActivityInjector {
+public abstract class BaseApplication extends MultiDexApplication implements HasActivityInjector {
 
     private static BaseApplication mApplication;
 
