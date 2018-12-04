@@ -38,12 +38,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IView,
     private LoadingDialogUtil mLoadingDialogUtil;
     public LoadViewHelper loadViewHelper;
 
-    @Inject
-    DispatchingAndroidInjector<Fragment> supportFragmentInjector;
-    @Inject
-    DispatchingAndroidInjector<android.app.Fragment> frameworkFragmentInjector;
-
-
     private Unbinder mUnbinder;
 
     @Override
@@ -76,16 +70,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IView,
      */
     protected boolean isMVPMode() {
         return false;
-    }
-
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return supportFragmentInjector;
-    }
-
-    @Override
-    public AndroidInjector<android.app.Fragment> fragmentInjector() {
-        return frameworkFragmentInjector;
     }
 
     /**
