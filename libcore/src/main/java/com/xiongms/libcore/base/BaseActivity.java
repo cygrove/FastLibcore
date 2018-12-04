@@ -48,7 +48,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IView,
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        if (!isMVPMode()) {
+        if (isMVPMode()) {
             AndroidInjection.inject(this);
         }
         super.onCreate(savedInstanceState);
