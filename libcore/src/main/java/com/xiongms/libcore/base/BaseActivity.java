@@ -31,7 +31,7 @@ import dagger.android.support.HasSupportFragmentInjector;
  * @author cygrove
  * @time 2018-11-12 11:31
  */
-public abstract class BaseActivity extends RxAppCompatActivity implements IView, HasFragmentInjector, HasSupportFragmentInjector {
+public abstract class BaseActivity extends RxAppCompatActivity implements IView {
 
     protected Context mContext;
 

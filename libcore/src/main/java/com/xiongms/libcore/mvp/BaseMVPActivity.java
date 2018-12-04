@@ -11,6 +11,8 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasFragmentInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Activity的基类
@@ -18,7 +20,7 @@ import dagger.android.DispatchingAndroidInjector;
  * @author cygrove
  * @time 2018-11-12 11:31
  */
-public abstract class BaseMVPActivity<P extends IPresenter> extends BaseActivity {
+public abstract class BaseMVPActivity<P extends IPresenter> extends BaseActivity implements HasFragmentInjector, HasSupportFragmentInjector {
 
     @Inject
     @Nullable
