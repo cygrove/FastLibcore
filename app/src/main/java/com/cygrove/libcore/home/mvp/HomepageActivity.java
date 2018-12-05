@@ -85,6 +85,7 @@ public class HomepageActivity extends BaseMVPActivity<HomepagePersenter> impleme
     }
 
     private void tabChanged(int index) {
+        viewpager = null;
         mPresenter.tabChanage(index);
         viewpager.setCurrentItem(index);
     }
@@ -97,6 +98,7 @@ public class HomepageActivity extends BaseMVPActivity<HomepagePersenter> impleme
         QRBQMUITabSegment.Tab tab = new QRBQMUITabSegment.Tab(title);
         return tab;
     }
+
 
     class iViewpagerAdapter extends FragmentStatePagerAdapter {
         public iViewpagerAdapter(FragmentManager fm) {

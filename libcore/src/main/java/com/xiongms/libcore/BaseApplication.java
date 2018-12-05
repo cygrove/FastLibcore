@@ -21,6 +21,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.xiongms.libcore.config.AppConfig;
 import com.xiongms.libcore.env.Environment;
 import com.xiongms.libcore.glide.GlideLoader;
+import com.xiongms.libcore.utils.CrashUtil;
 import com.xiongms.libcore.utils.FileUtil;
 import com.xiongms.libcore.utils.LoadViewHelper;
 import com.xiongms.libcore.utils.ResourcesUtil;
@@ -37,7 +38,7 @@ import dagger.android.HasActivityInjector;
  * @author cygrove
  * @time 2018-11-02 10:38
  */
-public abstract class BaseApplication extends MultiDexApplication implements HasActivityInjector {
+public abstract class BaseApplication extends Application implements HasActivityInjector {
 
     private static BaseApplication mApplication;
 
@@ -91,6 +92,8 @@ public abstract class BaseApplication extends MultiDexApplication implements Has
         registerActivityLifecycleCallbacks();
         FileUtil.createDefaultDir();
         ToastUtil.init(this);
+        CrashUtil crash = CrashUtil.getInstance();
+        crash.setCustomCrashInfo(this);
     }
 
 

@@ -32,19 +32,13 @@ import dagger.android.support.HasSupportFragmentInjector;
  * @time 2018-11-12 11:31
  */
 public abstract class BaseActivity extends RxAppCompatActivity implements IView {
-
-    protected Context mContext;
-
-    private LoadingDialogUtil mLoadingDialogUtil;
     public LoadViewHelper loadViewHelper;
-
+    protected Context mContext;
+    private LoadingDialogUtil mLoadingDialogUtil;
     private Unbinder mUnbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        if (isMVPMode()) {
-            AndroidInjection.inject(this);
-        }
         super.onCreate(savedInstanceState);
         mContext = this;
         ActivityUtil.getInstance().addActivity(this);
@@ -63,14 +57,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IView 
         initData(savedInstanceState);
     }
 
-    /**
-     * 是否采用MVP模式，BaseMVPActivity中返回true
-     *
-     * @return 为true时，不调用dagger2 inject注入
-     */
-    protected boolean isMVPMode() {
-        return false;
-    }
 
     /**
      * 初始化 布局资源文件ID, 如果 {@link #initView(Bundle)} 返回 0, 框架则不会调用 {@link Activity#setContentView(int)}
@@ -99,6 +85,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IView 
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY)
             mUnbinder.unbind();
         this.mUnbinder = null;
+
         if (mLoadingDialogUtil != null) {
             mLoadingDialogUtil.destoryLoadingDialog();
             mLoadingDialogUtil = null;
@@ -112,7 +99,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IView 
 
     @Override
     public Context getContext() {
-        return mContext;
+        return this;
     }
 
     public void showLoadingDialog() {
@@ -139,13 +126,13 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IView 
         }
     }
 
-    public void hideLoading() {
-        cancelLoadingDialog();
-    }
-
     @Override
     public void showToast(String msg) {
         ToastUtil.show(msg);
+    }
+
+    public void hideLoading() {
+        cancelLoadingDialog();
     }
 
     /**

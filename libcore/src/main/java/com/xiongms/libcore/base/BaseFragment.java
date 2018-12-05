@@ -26,7 +26,6 @@ import butterknife.Unbinder;
  * @time 2018-11-17 15:55
  */
 public abstract class BaseFragment extends RxFragment implements IView {
-    protected final String TAG = this.getClass().getSimpleName();
     protected View mRootView;
     private Unbinder mUnbinder;
     protected Activity mActivity;
