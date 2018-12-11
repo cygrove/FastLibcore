@@ -23,12 +23,12 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField "String", "FILE_PROVIDER", "\"" + "com.cygrove.libcore.provider" + "\""
+            buildConfigField "String", "FILE_PROVIDER", "\"" + rootProject.ext.applicationId + ".provider" + "\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
-            buildConfigField "String", "FILE_PROVIDER", "\"" + "com.cygrove.libcore.provider" + "\""
+            buildConfigField "String", "FILE_PROVIDER", "\"" + rootProject.ext.applicationId + ".provider" + "\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -141,7 +141,7 @@ dependencies {
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.71"
     api 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
-    api 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
+    api 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
     // apt
     annotationProcessor 'com.github.frankiesardo:auto-parcel-processor:0.3.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'

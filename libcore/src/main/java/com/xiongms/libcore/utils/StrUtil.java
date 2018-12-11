@@ -711,4 +711,15 @@ public class StrUtil {
         };
         editText.setFilters(new InputFilter[]{filter});
     }
+
+    public static boolean isPriceFormat(String string) {
+        char[] chats = string.toCharArray();
+        for (char c : chats) {
+            if ((c < '0' || c > '9') && c != '.') {
+                // showToast("价格格式有误");
+                return false;
+            }
+        }
+        return true;
+    }
 }

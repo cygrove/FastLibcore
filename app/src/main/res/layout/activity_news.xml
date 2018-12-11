@@ -17,18 +17,18 @@
         android:layout_height="match_parent"
         app:srlDragRate="0.7"
         app:srlEnableAutoLoadMore="true"
-        app:srlHeaderHeight="150dp"
+        app:srlHeaderHeight="50dp"
         app:srlHeaderInsetStart="?attr/actionBarSize"
         app:srlHeaderMaxDragRate="1.3"
         app:srlHeaderTriggerRate="0.5">
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/gif_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/gif_tag"
-            app:layout_srlBackgroundColor="@android:color/transparent"
-            app:layout_srlSpinnerStyle="Scale" />
+        <!--<pl.droidsonroids.gif.GifImageView-->
+            <!--android:id="@+id/gif_header"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/gif_tag"-->
+            <!--app:layout_srlBackgroundColor="@android:color/transparent"-->
+            <!--app:layout_srlSpinnerStyle="Scale" />-->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"

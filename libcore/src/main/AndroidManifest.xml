@@ -26,7 +26,7 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    />
     <!--安装应用-->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
@@ -39,7 +39,7 @@
         <service android:name=".download.DownloadService" />
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.cygrove.libcore.provider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -47,5 +47,4 @@
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
-
 </manifest>

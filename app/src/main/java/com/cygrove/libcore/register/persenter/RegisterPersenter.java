@@ -3,7 +3,7 @@ package com.cygrove.libcore.register.persenter;
 import android.support.v4.app.FragmentActivity;
 
 import com.cygrove.libcore.R;
-import com.cygrove.libcore.main.entity.HousingEstate;
+import com.cygrove.libcore.register.HousingEstate;
 import com.cygrove.libcore.register.VersionInfo;
 import com.cygrove.libcore.register.api.CheckNewVersion;
 import com.cygrove.libcore.register.api.LoginApi;
@@ -49,27 +49,6 @@ public class RegisterPersenter extends BasePresenter<Contract.View> implements C
         super.onAttach(rootView);
     }
 
-    @Override
-    public void getCode() {
-        RxResultHelper.getHttpObservable(mRootView.getContext(), api.getCode(mRootView.getPhone())).subscribe(new RxResultSubscriber<HousingEstate>() {
-            @Override
-            public void start() {
-                mRootView.showLoading(true);
-            }
-
-            @Override
-            public void error(String code, String msg) {
-                mRootView.hideLoading();
-                mRootView.showToast(msg);
-            }
-
-
-            @Override
-            public void success(BaseBean<HousingEstate> t) {
-                mRootView.hideLoading();
-            }
-        });
-    }
 
     @Override
     public void clickShowEmpty() {

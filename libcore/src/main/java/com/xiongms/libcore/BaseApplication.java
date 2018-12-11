@@ -26,6 +26,7 @@ import com.xiongms.libcore.utils.FileUtil;
 import com.xiongms.libcore.utils.LoadViewHelper;
 import com.xiongms.libcore.utils.ResourcesUtil;
 import com.xiongms.libcore.utils.ToastUtil;
+import com.xiongms.widget.GifHeader;
 
 
 import javax.inject.Inject;
@@ -113,7 +114,7 @@ public abstract class BaseApplication extends Application implements HasActivity
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
             layout.setPrimaryColors(Color.parseColor("#444444"), Color.WHITE);//全局设置主题颜色
-            return new ClassicsHeader(context);
+            return new GifHeader(context);
         });
         //设置全局的Footer构建器
         SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) -> {

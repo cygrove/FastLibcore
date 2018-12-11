@@ -18,19 +18,15 @@ import com.cygrove.libcore.register.persenter.RegisterPersenter;
 import com.orhanobut.logger.Logger;
 import com.xiongms.libcore.config.RouterConfig;
 import com.xiongms.libcore.mvp.BaseMVPActivity;
-import com.xiongms.libcore.utils.ActivityUtil;
 import com.xiongms.libcore.utils.AppPreferencesHelper;
 import com.xiongms.libcore.utils.LoadViewHelper;
 import com.xiongms.libcore.utils.ResourcesUtil;
 import com.xiongms.widget.TitleView;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -114,7 +110,6 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPersenter> impleme
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
-                mPresenter.getCode();
                 break;
             case R.id.btn_next:
                 mPresenter.clickShowEmpty();

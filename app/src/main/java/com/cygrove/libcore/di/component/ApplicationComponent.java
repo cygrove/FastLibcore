@@ -2,7 +2,6 @@ package com.cygrove.libcore.di.component;
 
 import com.cygrove.libcore.AppApplication;
 import com.cygrove.libcore.home.di.HomepageActivityModule;
-import com.cygrove.libcore.main.di.module.MainActivitysModule;
 import com.cygrove.libcore.news.di.NewsActivityModule;
 import com.cygrove.libcore.qrcode.di.ScanActivityModule;
 import com.cygrove.libcore.register.moudule.RegisterActivityModule;
@@ -29,7 +28,6 @@ import dagger.android.support.AndroidSupportInjectionModule;
         GlobalConfigModule.class,
         ApplicationModule.class,
         NetModule.class,
-        MainActivitysModule.class,
         RegisterActivityModule.class,
         NewsActivityModule.class,
         HomepageActivityModule.class,

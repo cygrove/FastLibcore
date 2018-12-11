@@ -18,7 +18,6 @@ public interface Contract {
     }
 
     interface Persenter extends IPresenter<View> {
-        void getCode();
 
         void clickShowEmpty();
 

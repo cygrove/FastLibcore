@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.xiongms.libcore.base.BaseActivity;
-import com.xiongms.libcore.utils.ToastUtil;
 
 import javax.inject.Inject;
 

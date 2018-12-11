@@ -40,7 +40,6 @@
     <color name="list_selector_background_normal">#00000000</color>
 
 
-
     <color name="text_black">#111111</color>
     <color name="text_gray">#777777</color>
     <color name="text_light_gray">#999999</color>
@@ -54,8 +53,6 @@
 
 
     <color name="chart_line">#B38047</color>
-
-
 
 
     <color name="tab_selected_pressed">#FFC44033</color>

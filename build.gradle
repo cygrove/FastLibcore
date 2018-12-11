@@ -40,3 +40,6 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+ext {
+    applicationId = 'com.cygrove.libcore'
+}

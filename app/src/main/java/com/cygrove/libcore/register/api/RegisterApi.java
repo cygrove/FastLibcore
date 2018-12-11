@@ -1,12 +1,10 @@
 package com.cygrove.libcore.register.api;
 
-
-import com.cygrove.libcore.main.entity.HousingEstate;
+import com.cygrove.libcore.register.HousingEstate;
 import com.xiongms.libcore.bean.BaseBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
 public interface RegisterApi {

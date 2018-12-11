@@ -23,6 +23,7 @@ import com.xiongms.widget.TitleView;
 import java.util.List;
 
 import butterknife.BindView;
+import pl.droidsonroids.gif.GifImageView;
 
 public class NewsActivity extends BaseMVPActivity<NewPersenter> implements Contract.View {
     @BindView(R.id.recyclerView)

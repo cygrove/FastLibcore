@@ -184,7 +184,6 @@ public class PickerHelper {
                 .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
                 .setContentTextSize(20)
                 .build();
-
         switch (showStage) {
             case 1:
                 pvOptions.setPicker(options1Items);//一级选择器

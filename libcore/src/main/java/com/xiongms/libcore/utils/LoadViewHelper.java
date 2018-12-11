@@ -286,6 +286,7 @@ public class LoadViewHelper {
         }
 
         if (view.getVisibility() != View.VISIBLE) {
+            currentView.setVisibility(View.GONE);
             view.setVisibility(View.VISIBLE);
         }
 
