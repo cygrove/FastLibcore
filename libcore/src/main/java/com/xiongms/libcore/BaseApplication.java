@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -17,17 +16,16 @@ import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
-import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.xiongms.libcore.config.AppConfig;
 import com.xiongms.libcore.env.Environment;
 import com.xiongms.libcore.glide.GlideLoader;
+import com.xiongms.libcore.utils.AppPreferencesHelper;
 import com.xiongms.libcore.utils.CrashUtil;
 import com.xiongms.libcore.utils.FileUtil;
 import com.xiongms.libcore.utils.LoadViewHelper;
 import com.xiongms.libcore.utils.ResourcesUtil;
 import com.xiongms.libcore.utils.ToastUtil;
 import com.xiongms.widget.GifHeader;
-
 
 import javax.inject.Inject;
 
@@ -82,6 +80,9 @@ public abstract class BaseApplication extends Application implements HasActivity
     }
 
     public void init() {
+        /**
+         * 注意各个组件初始化顺序
+         */
         initLogger();
         ResourcesUtil.init(getResources());
         // 部分机型中兼容vector图片
@@ -93,17 +94,15 @@ public abstract class BaseApplication extends Application implements HasActivity
         registerActivityLifecycleCallbacks();
         FileUtil.createDefaultDir();
         ToastUtil.init(this);
-        CrashUtil crash = CrashUtil.getInstance();
-        crash.setCustomCrashInfo(this);
+        CrashUtil.getInstance().setCustomCrashInfo(this);
     }
-
 
     public Environment getEnv() {
         return mEnv;
     }
 
-    public Gson getGson() {
-        return mEnv.gson();
+    public AppPreferencesHelper getPreferences() {
+        return getInstance().getEnv().appPreferencesHelper();
     }
 
     public Context getContext() {

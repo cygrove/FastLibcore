@@ -16,8 +16,6 @@ public abstract class Environment implements Parcelable {
 
     public abstract String appVersion();
 
-    public abstract Gson gson();
-
     public abstract Retrofit rqbRetrofit();
 
     public abstract AppPreferencesHelper appPreferencesHelper();
@@ -29,8 +27,6 @@ public abstract class Environment implements Parcelable {
         public abstract Builder packageName(String __);
 
         public abstract Builder appVersion(String __);
-
-        public abstract Builder gson(Gson __);
 
         public abstract Builder rqbRetrofit(Retrofit __);
 

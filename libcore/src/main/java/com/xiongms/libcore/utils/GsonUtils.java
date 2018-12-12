@@ -5,11 +5,17 @@ import android.content.res.AssetManager;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
 import com.orhanobut.logger.Logger;
 import com.xiongms.libcore.bean.BaseBean;
 import com.xiongms.libcore.bean.BasePageBean;
@@ -21,16 +27,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author cygrove
+ * @time 2018-11-16 11:33
+ */
 public class GsonUtils {
-    private static Gson gson = null;
+    private static GsonBuilder gsonBuilder = new GsonBuilder()
+            .registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory())
+            .setDateFormat("yyyy-MM-dd HH:mm:ss")
+            .serializeNulls();
 
-    static {
-        if (gson == null) {
-            gson = new Gson();
-        }
-    }
-
-    private GsonUtils() {
+    public static Gson getGson() {
+        Gson gson = gsonBuilder.create();
+        return gson;
     }
 
     /**
@@ -42,6 +51,7 @@ public class GsonUtils {
     public static String gsonToString(Object object) {
         String gsonString = null;
         try {
+            Gson gson = gsonBuilder.create();
             if (gson != null) {
                 gsonString = gson.toJson(object);
             }
@@ -61,6 +71,7 @@ public class GsonUtils {
     public static <T> T gsonToBean(String json, Class<T> cls) {
         T t = null;
         try {
+            Gson gson = gsonBuilder.create();
             if (gson != null && !TextUtils.isEmpty(json)) {
                 t = gson.fromJson(json, cls);
             }
@@ -80,6 +91,7 @@ public class GsonUtils {
     public static <T> T gsonToObject(String json, Class<T> cls) {
         T t = (T) new Object();
         try {
+            Gson gson = gsonBuilder.create();
             if (json != null && !TextUtils.isEmpty(json)) {
                 BaseBean<T> baseResponseBean = gson.fromJson(json, new TypeToken<BaseBean<T>>() {
                 }.getType());
@@ -107,6 +119,7 @@ public class GsonUtils {
         T t = (T) new Object();
         BaseBean<T> baseResponseBean = new BaseBean<T>();
         try {
+            Gson gson = gsonBuilder.create();
             if (json != null && !TextUtils.isEmpty(json)) {
                 baseResponseBean = gson.fromJson(json, new TypeToken<BaseBean<T>>() {
                 }.getType());
@@ -131,6 +144,7 @@ public class GsonUtils {
     public static <T> BasePageBean<T> gsonToBasePageBean(String json) {
         BasePageBean data = null;
         try {
+            Gson gson = gsonBuilder.create();
             if (gson != null && !TextUtils.isEmpty(json)) {
                 BaseBean<BasePageBean<T>> baseResponseBean = gson.fromJson(json,
                         new TypeToken<BaseBean<BasePageBean<T>>>() {
@@ -189,6 +203,7 @@ public class GsonUtils {
     public static <T> List<T> gsonToPageList(String json, Class<T> cls) {
         List<T> list = new ArrayList<>();
         try {
+            Gson gson = gsonBuilder.create();
             if (gson != null && !TextUtils.isEmpty(json)) {
                 BaseBean<BasePageBean<T>> baseResponseBean = gson.fromJson(json,
                         new TypeToken<BaseBean<BasePageBean<T>>>() {
@@ -218,6 +233,7 @@ public class GsonUtils {
     public static <T> List<T> gsonToList(String json, Class<T> cls) {
         List<T> list = new ArrayList<>();
         try {
+            Gson gson = gsonBuilder.create();
             if (gson != null && !TextUtils.isEmpty(json)) {
                 BaseBean<List<T>> baseResponseBean = gson.fromJson(json, new
                         TypeToken<BaseBean<List<T>>>
@@ -245,6 +261,7 @@ public class GsonUtils {
     public static <T> List<T> gsonToListBean(String json, Class<T> cls) {
         List<T> list = new ArrayList<>();
         try {
+            Gson gson = gsonBuilder.create();
             if (gson != null && !TextUtils.isEmpty(json)) {
                 JsonArray array = new JsonParser().parse(json).getAsJsonArray();
                 for (final JsonElement elem : array) {
@@ -266,6 +283,7 @@ public class GsonUtils {
     public static <T> List<Map<String, T>> gsonToListMaps(String json) {
         List<Map<String, T>> list = null;
         try {
+            Gson gson = gsonBuilder.create();
             if (gson != null && !TextUtils.isEmpty(json)) {
                 list = gson.fromJson(json, new TypeToken<List<Map<String, T>>>() {
                 }.getType());
@@ -285,6 +303,7 @@ public class GsonUtils {
     public static <T> Map<String, T> gsonToMaps(String json) {
         Map<String, T> map = null;
         try {
+            Gson gson = gsonBuilder.create();
             if (gson != null && !TextUtils.isEmpty(json)) {
                 map = gson.fromJson(json, new TypeToken<Map<String, T>>() {
                 }.getType());
@@ -310,5 +329,36 @@ public class GsonUtils {
             e.printStackTrace();
         }
         return stringBuilder.toString();
+    }
+
+    public static class NullStringToEmptyAdapterFactory<T> implements TypeAdapterFactory {
+        @SuppressWarnings("unchecked")
+        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+            Class<T> rawType = (Class<T>) type.getRawType();
+            if (rawType != String.class) {
+                return null;
+            }
+            return (TypeAdapter<T>) new StringNullAdapter();
+        }
+    }
+
+    public static class StringNullAdapter extends TypeAdapter<String> {
+        @Override
+        public String read(JsonReader reader) throws IOException {
+            if (reader.peek() == JsonToken.NULL) {
+                reader.nextNull();
+                return "";
+            }
+            return reader.nextString();
+        }
+
+        @Override
+        public void write(JsonWriter writer, String value) throws IOException {
+            if (value == null) {
+                writer.nullValue();
+                return;
+            }
+            writer.value(value);
+        }
     }
 }

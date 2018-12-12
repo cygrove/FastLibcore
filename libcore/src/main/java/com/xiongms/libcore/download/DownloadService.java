@@ -59,6 +59,6 @@ public class DownloadService extends BaseService {
 
     @Override
     public void downloading(int currentProgress, int totalProgress) {
-        NotificationUtil.showDownloadingNotification(this, currentProgress, totalProgress, largeIcon, iconResId, appName, false);
+        NotificationUtil.showDownloadingNotification(this, currentProgress, totalProgress, largeIcon, iconResId, "正在下载" + appName, false);
     }
 }

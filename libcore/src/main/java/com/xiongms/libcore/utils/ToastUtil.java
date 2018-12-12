@@ -26,7 +26,6 @@ public class ToastUtil {
         if (mToast == null) {
             return;
         }
-
         // APP处于前台时才显示Toast
         if (BaseApplication.getInstance().mIsForeground) {
             View view = mToast.getView();

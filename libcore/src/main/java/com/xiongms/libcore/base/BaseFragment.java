@@ -56,17 +56,19 @@ public abstract class BaseFragment extends RxFragment implements IView {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mRootView = initView(inflater, container, savedInstanceState);
-
-        try {
-            if (mRootView != null) {
-                //绑定到butterknife
-                mUnbinder = ButterKnife.bind(this, mRootView);
+        if (!hasCreateView || mRootView == null) {
+            hasCreateView = true;
+            mRootView = initView(inflater, container, savedInstanceState);
+            try {
+                if (mRootView != null) {
+                    //绑定到butterknife
+                    mUnbinder = ButterKnife.bind(this, mRootView);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            initData(savedInstanceState);
         }
-        initData(savedInstanceState);
         return mRootView;
     }
 
@@ -114,10 +116,6 @@ public abstract class BaseFragment extends RxFragment implements IView {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (!hasCreateView && getUserVisibleHint()) {
-            onFragmentVisibleChange(true);
-            isFragmentVisible = true;
-        }
     }
 
     private void initVariable() {
@@ -134,6 +132,24 @@ public abstract class BaseFragment extends RxFragment implements IView {
      *                  false 可见  -> 不可见
      */
     protected void onFragmentVisibleChange(boolean isVisible) {
+        if (isVisible) {
+            onVisible();
+        } else {
+            onInvisible();
+        }
+    }
+
+    /**
+     * 可见
+     */
+    protected void onVisible() {
+    }
+
+    /**
+     * 不可见
+     */
+    protected void onInvisible() {
+
     }
 
     @Override

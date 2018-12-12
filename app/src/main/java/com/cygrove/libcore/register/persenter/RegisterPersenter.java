@@ -77,6 +77,7 @@ public class RegisterPersenter extends BasePresenter<Contract.View> implements C
             @Override
             public void success(BaseBean<VersionInfo> t) {
                 mRootView.hideLoading();
+                t.getBody().setUrl("http://shouji.360tpcdn.com/58LIE0lufdThR-tKwaT1RFJnYzYVGpmPcfD6J3dagwJGkSIbUtTHHn0ALX5HG9kySsaAkt-9u9LPgEh2ttViaCo7IpYyF0zgJzKUZwcBw1k1.apk?sign=f6966f2fc04ca843");
                 CheckUpdateOption option = new CheckUpdateOption.Builder()
                         .setAppName(ResourcesUtil.getString(R.string.app_name))
                         .setFileName("xcc_apk")

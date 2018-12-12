@@ -48,7 +48,6 @@ public class ApplicationModule {
                 .networkOperator(networkOperator)
                 .packageName(packageName)
                 .appVersion(appVersion)
-                .gson(gson)
                 .rqbRetrofit(rqbRetrofit)
                 .appPreferencesHelper(appPreferencesHelper)
                 .build();

@@ -47,7 +47,7 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
         requestBuilder.header("Proxy-Connection", "keep-alive");
         requestBuilder.header("Cache-Control", "max-age=0");
         requestBuilder.header("Content-Type", "application/json");
-        requestBuilder.header("token", BaseApplication.getInstance().getEnv().appPreferencesHelper().getToken());
+        requestBuilder.header("token", BaseApplication.getInstance().getPreferences().getToken());
         requestBuilder.header("clt", "android");
         requestBuilder.header("device", Build.MODEL);
         requestBuilder.header("appVersion", BaseApplication.getInstance().getEnv().appVersion());
@@ -64,7 +64,7 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
             modifiedUrlBuilder.addQueryParameter("av", BaseApplication.getInstance().getEnv().appVersion());
             modifiedUrlBuilder.addQueryParameter("nt", String.valueOf(BaseApplication.getInstance().getEnv().networkOperator()));
 
-            modifiedUrlBuilder.addQueryParameter("tkn", BaseApplication.getInstance().getEnv().appPreferencesHelper().getToken());
+            modifiedUrlBuilder.addQueryParameter("tkn", BaseApplication.getInstance().getPreferences().getToken());
 
 //            return requestBuilder.url(modifiedUrlBuilder.build()).build();//同理如果接口有特殊要求的。可以解开注释、追加以上参数
             return requestBuilder.build();
@@ -105,7 +105,7 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
                 jsonObject.put("av", BaseApplication.getInstance().getEnv().appVersion());
                 jsonObject.put("nt", String.valueOf(BaseApplication.getInstance().getEnv().networkOperator()));
 
-                jsonObject.put("tkn", BaseApplication.getInstance().getEnv().appPreferencesHelper().getToken());
+                jsonObject.put("tkn", BaseApplication.getInstance().getPreferences().getToken());
 
                 newJsonBody = jsonObject.toString();
             } catch (JSONException e) {

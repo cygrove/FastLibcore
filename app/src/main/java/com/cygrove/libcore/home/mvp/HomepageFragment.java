@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.cygrove.libcore.R;
 import com.cygrove.libcore.qrcode.mvp.ScanActivity;
 import com.xiongms.libcore.base.BaseFragment;
+import com.xiongms.libcore.dialog.MessageDialogBuilder;
 import com.xiongms.widget.PickerHelper;
 
 import butterknife.BindView;
@@ -23,6 +24,7 @@ import butterknife.OnClick;
 public class HomepageFragment extends BaseFragment implements Contract.View {
     @BindView(R.id.text)
     TextView text;
+    private String s;
 
     @Override
     public View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,14 +34,14 @@ public class HomepageFragment extends BaseFragment implements Contract.View {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        text.setText(getArguments().getString("tab"));
+        HomepageActivity activity = (HomepageActivity) mActivity;
+        activity.setStatus(Color.RED);
     }
 
-    @Override
-    protected void onFragmentVisibleChange(boolean isVisible) {
-        super.onFragmentVisibleChange(isVisible);
-        String s = getArguments().getString("tab");
+    private void setStatusbar() {
         HomepageActivity activity = (HomepageActivity) mActivity;
-        switch (s) {
+        switch (getArguments().getString("tab")) {
             case "0":
                 activity.setStatus(Color.RED);
                 break;
@@ -53,9 +55,13 @@ public class HomepageFragment extends BaseFragment implements Contract.View {
                 activity.setStatus(Color.BLUE);
                 break;
         }
-        text.setText(s);
     }
 
+    @Override
+    protected void onFragmentVisibleChange(boolean isVisible) {
+        super.onFragmentVisibleChange(isVisible);
+        setStatusbar();
+    }
 
     @OnClick(R.id.text)
     public void onViewClicked() {
@@ -67,9 +73,10 @@ public class HomepageFragment extends BaseFragment implements Contract.View {
                 break;
             case "1":
                 AlertDialog dialog = new AlertDialog.Builder(getContext())
+                        .setCancelable(true)
                         .setNegativeButton("取消", (dialogInterface, i) -> {
-
-                        }).setPositiveButton("确定", (dialogInterface, i) -> {
+                        })
+                        .setPositiveButton("确定", (dialogInterface, i) -> {
 
                         }).create();
                 dialog.setTitle("title");
@@ -77,6 +84,13 @@ public class HomepageFragment extends BaseFragment implements Contract.View {
                 dialog.show();
                 break;
             case "2":
+                new MessageDialogBuilder(mContext)
+                        .setOk("确定", dialog1 -> {
+                            showToast("hello");
+                        })
+                        .setTitle("title")
+                        .setCancel("cancel", Dialog::cancel)
+                        .setMessage("message").build().show();
                 break;
             case "3":
                 PickerHelper helper = new PickerHelper();
@@ -89,6 +103,5 @@ public class HomepageFragment extends BaseFragment implements Contract.View {
                 });
                 break;
         }
-
     }
 }
