@@ -7,17 +7,17 @@
     android:orientation="vertical"
     tools:context=".home.mvp.HomepageActivity">
 
-    <com.xiongms.widget.TitleView
+    <com.cygrove.widget.TitleView
         android:id="@+id/title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.xiongms.widget.QRBQMUITabSegment
+    <com.cygrove.widget.QRBQMUITabSegment
         android:id="@+id/tabsegment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/px115" />
 
-    <com.xiongms.widget.NoScrollViewPager
+    <com.cygrove.widget.NoScrollViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

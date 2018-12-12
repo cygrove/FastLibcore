@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".qrcode.mvp.ScanActivity">
 
-    <com.xiongms.widget.qr_scan.WeakLightZXingView
+    <com.cygrove.widget.qr_scan.WeakLightZXingView
         android:id="@+id/zxingview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

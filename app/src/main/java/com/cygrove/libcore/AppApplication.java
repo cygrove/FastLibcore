@@ -4,9 +4,8 @@ package com.cygrove.libcore;
 import com.cygrove.libcore.di.component.ApplicationComponent;
 import com.cygrove.libcore.di.component.DaggerApplicationComponent;
 import com.cygrove.libcore.network.GlobalHttpHandlerImpl;
-import com.xiongms.libcore.BaseApplication;
-import com.xiongms.libcore.di.module.ApplicationModule;
-import com.xiongms.libcore.di.module.GlobalConfigModule;
+import com.cygrove.libcore.di.module.ApplicationModule;
+import com.cygrove.libcore.di.module.GlobalConfigModule;
 
 
 /**

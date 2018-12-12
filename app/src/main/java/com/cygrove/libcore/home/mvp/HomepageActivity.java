@@ -5,20 +5,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.cygrove.libcore.R;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
-import com.xiongms.libcore.mvp.BaseMVPActivity;
-import com.xiongms.widget.NoScrollViewPager;
-import com.xiongms.widget.QRBQMUITabSegment;
-import com.xiongms.widget.TitleView;
+import com.cygrove.libcore.mvp.BaseMVPActivity;
+import com.cygrove.widget.NoScrollViewPager;
+import com.cygrove.widget.QRBQMUITabSegment;
+import com.cygrove.widget.TitleView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import statusbar.cygrove.com.statusbarhelper.StatusBarHelper;
 
 public class HomepageActivity extends BaseMVPActivity<HomepagePersenter> implements Contract.View {
@@ -99,7 +99,7 @@ public class HomepageActivity extends BaseMVPActivity<HomepagePersenter> impleme
     }
 
 
-    class iViewpagerAdapter extends FragmentStatePagerAdapter {
+    class iViewpagerAdapter extends FragmentPagerAdapter {
         public iViewpagerAdapter(FragmentManager fm) {
             super(fm);
         }

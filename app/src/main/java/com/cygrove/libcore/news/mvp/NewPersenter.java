@@ -2,12 +2,12 @@ package com.cygrove.libcore.news.mvp;
 
 import com.cygrove.libcore.news.api.NewsApi;
 import com.cygrove.libcore.news.bean.NewsEntry;
-import com.xiongms.libcore.bean.BaseBean;
-import com.xiongms.libcore.bean.BasePageBean;
-import com.xiongms.libcore.config.AppConfig;
-import com.xiongms.libcore.mvp.BasePresenter;
-import com.xiongms.libcore.network.rx.RxResultHelper;
-import com.xiongms.libcore.network.rx.RxResultSubscriber;
+import com.cygrove.libcore.bean.BaseBean;
+import com.cygrove.libcore.bean.BasePageBean;
+import com.cygrove.libcore.config.AppConfig;
+import com.cygrove.libcore.mvp.BasePresenter;
+import com.cygrove.libcore.network.rx.RxResultHelper;
+import com.cygrove.libcore.network.rx.RxResultSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;

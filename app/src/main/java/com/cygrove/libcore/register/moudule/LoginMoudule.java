@@ -1,6 +1,6 @@
 package com.cygrove.libcore.register.moudule;
 
-import com.xiongms.libcore.bean.BaseEntity;
+import com.cygrove.libcore.bean.BaseEntity;
 
 public class LoginMoudule extends BaseEntity {
     /**

@@ -57,7 +57,7 @@
             android:src="@drawable/ic_pulltorefresh_arrow"
             android:visibility="invisible" />
 
-        <com.xiongms.widget.xrecyclerview.SimpleViewSwitcher
+        <com.cygrove.widget.xrecyclerview.SimpleViewSwitcher
             android:id="@+id/listview_header_progressbar"
             android:layout_width="35dip"
             android:layout_height="35dip"

@@ -5,9 +5,9 @@ import com.cygrove.libcore.home.di.HomepageActivityModule;
 import com.cygrove.libcore.news.di.NewsActivityModule;
 import com.cygrove.libcore.qrcode.di.ScanActivityModule;
 import com.cygrove.libcore.register.moudule.RegisterActivityModule;
-import com.xiongms.libcore.di.module.ApplicationModule;
-import com.xiongms.libcore.di.module.GlobalConfigModule;
-import com.xiongms.libcore.di.module.NetModule;
+import com.cygrove.libcore.di.module.ApplicationModule;
+import com.cygrove.libcore.di.module.GlobalConfigModule;
+import com.cygrove.libcore.di.module.NetModule;
 
 import javax.inject.Singleton;
 

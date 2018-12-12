@@ -8,14 +8,12 @@ import android.support.annotation.Nullable;
 
 import com.bumptech.glide.request.FutureTarget;
 import com.cygrove.libcore.R;
-import com.xiongms.libcore.glide.GlideApp;
-import com.xiongms.libcore.mvp.BaseMVPActivity;
-import com.xiongms.libcore.utils.ToastUtil;
-import com.xiongms.widget.qr_scan.ScanBoxView;
-import com.xiongms.widget.qr_scan.WeakLightZXingView;
+import com.cygrove.libcore.glide.GlideApp;
+import com.cygrove.libcore.mvp.BaseMVPActivity;
+import com.cygrove.libcore.utils.ToastUtil;
+import com.cygrove.widget.qr_scan.WeakLightZXingView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.QRCodeDecoder;
 import pub.devrel.easypermissions.AfterPermissionGranted;

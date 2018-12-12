@@ -5,25 +5,18 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.bumptech.glide.gifdecoder.GifHeader;
 import com.cygrove.libcore.R;
 import com.cygrove.libcore.adapter.NewsAdapter;
 import com.cygrove.libcore.news.bean.NewsEntry;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshFooter;
-import com.scwang.smartrefresh.layout.api.RefreshHeader;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.constant.RefreshState;
-import com.scwang.smartrefresh.layout.listener.OnMultiPurposeListener;
 import com.scwang.smartrefresh.layout.util.DensityUtil;
-import com.xiongms.libcore.mvp.BaseMVPActivity;
-import com.xiongms.libcore.utils.LoadViewHelper;
-import com.xiongms.widget.TitleView;
+import com.cygrove.libcore.mvp.BaseMVPActivity;
+import com.cygrove.libcore.utils.LoadViewHelper;
+import com.cygrove.widget.TitleView;
 
 import java.util.List;
 
 import butterknife.BindView;
-import pl.droidsonroids.gif.GifImageView;
 
 public class NewsActivity extends BaseMVPActivity<NewPersenter> implements Contract.View {
     @BindView(R.id.recyclerView)

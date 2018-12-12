@@ -2,9 +2,9 @@ package com.cygrove.libcore.qrcode.di;
 
 import com.cygrove.libcore.qrcode.mvp.ScanActivity;
 import com.cygrove.libcore.qrcode.mvp.ScanModule;
-import com.xiongms.libcore.di.component.BaseActivityComponent;
-import com.xiongms.libcore.di.module.DefaultActivityModule;
-import com.xiongms.libcore.di.scope.ActivityScope;
+import com.cygrove.libcore.di.component.BaseActivityComponent;
+import com.cygrove.libcore.di.module.DefaultActivityModule;
+import com.cygrove.libcore.di.scope.ActivityScope;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

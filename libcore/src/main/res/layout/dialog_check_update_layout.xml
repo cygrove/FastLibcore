@@ -84,7 +84,7 @@
         android:layout_height="@dimen/dp_50"
         android:orientation="horizontal">
 
-        <com.xiongms.libcore.updateversion.view.CompatTextView
+        <com.cygrove.libcore.updateversion.view.CompatTextView
             android:id="@+id/check_update_negative"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -102,7 +102,7 @@
             android:layout_height="match_parent"
             android:background="@color/divider_color" />
 
-        <com.xiongms.libcore.updateversion.view.CompatTextView
+        <com.cygrove.libcore.updateversion.view.CompatTextView
             android:id="@+id/check_update_positive"
             android:layout_width="0dp"
             android:layout_height="match_parent"

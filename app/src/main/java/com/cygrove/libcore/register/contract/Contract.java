@@ -1,8 +1,8 @@
 package com.cygrove.libcore.register.contract;
 
 import com.cygrove.libcore.register.moudule.LoginMoudule;
-import com.xiongms.libcore.mvp.IPresenter;
-import com.xiongms.libcore.mvp.IView;
+import com.cygrove.libcore.mvp.IPresenter;
+import com.cygrove.libcore.mvp.IView;
 
 public interface Contract {
     interface View extends IView {

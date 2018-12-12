@@ -1,7 +1,7 @@
 package com.cygrove.libcore.home.mvp;
 
-import com.xiongms.libcore.mvp.IPresenter;
-import com.xiongms.libcore.mvp.IView;
+import com.cygrove.libcore.mvp.IPresenter;
+import com.cygrove.libcore.mvp.IView;
 
 public interface Contract {
     interface View extends IView {

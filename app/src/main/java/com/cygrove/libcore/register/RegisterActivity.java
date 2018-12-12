@@ -16,12 +16,12 @@ import com.cygrove.libcore.register.contract.Contract;
 import com.cygrove.libcore.register.moudule.LoginMoudule;
 import com.cygrove.libcore.register.persenter.RegisterPersenter;
 import com.orhanobut.logger.Logger;
-import com.xiongms.libcore.config.RouterConfig;
-import com.xiongms.libcore.mvp.BaseMVPActivity;
-import com.xiongms.libcore.utils.AppPreferencesHelper;
-import com.xiongms.libcore.utils.LoadViewHelper;
-import com.xiongms.libcore.utils.ResourcesUtil;
-import com.xiongms.widget.TitleView;
+import com.cygrove.libcore.config.RouterConfig;
+import com.cygrove.libcore.mvp.BaseMVPActivity;
+import com.cygrove.libcore.utils.AppPreferencesHelper;
+import com.cygrove.libcore.utils.LoadViewHelper;
+import com.cygrove.libcore.utils.ResourcesUtil;
+import com.cygrove.widget.TitleView;
 
 
 import javax.inject.Inject;

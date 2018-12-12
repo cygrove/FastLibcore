@@ -1,6 +1,6 @@
 package com.cygrove.libcore.qrcode.mvp;
 
-import com.xiongms.libcore.mvp.BasePresenter;
+import com.cygrove.libcore.mvp.BasePresenter;
 
 import javax.inject.Inject;
 

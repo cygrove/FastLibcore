@@ -11,7 +11,7 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <com.xiongms.widget.SingleCircleLoadingView
+    <com.cygrove.widget.SingleCircleLoadingView
         android:id="@+id/loadingView_1"
         android:layout_width="50dp"
         android:layout_height="50dp" />

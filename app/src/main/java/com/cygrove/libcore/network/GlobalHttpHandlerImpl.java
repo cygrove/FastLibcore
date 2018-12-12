@@ -2,9 +2,7 @@ package com.cygrove.libcore.network;
 
 import android.os.Build;
 
-import com.xiongms.libcore.BaseApplication;
-import com.xiongms.libcore.network.GlobalHttpHandler;
-import com.xiongms.libcore.utils.StrUtil;
+import com.cygrove.libcore.BaseApplication;
 
 import org.json.JSONException;
 import org.json.JSONObject;

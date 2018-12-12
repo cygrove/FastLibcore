@@ -2,7 +2,6 @@ package com.cygrove.libcore.home.mvp;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,9 +13,10 @@ import android.widget.TextView;
 
 import com.cygrove.libcore.R;
 import com.cygrove.libcore.qrcode.mvp.ScanActivity;
-import com.xiongms.libcore.base.BaseFragment;
-import com.xiongms.libcore.dialog.MessageDialogBuilder;
-import com.xiongms.widget.PickerHelper;
+import com.cygrove.libcore.base.BaseFragment;
+import com.cygrove.libcore.dialog.MessageDialogBuilder;
+import com.cygrove.widget.PickerHelper;
+import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,32 +35,12 @@ public class HomepageFragment extends BaseFragment implements Contract.View {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         text.setText(getArguments().getString("tab"));
-        HomepageActivity activity = (HomepageActivity) mActivity;
-        activity.setStatus(Color.RED);
-    }
-
-    private void setStatusbar() {
-        HomepageActivity activity = (HomepageActivity) mActivity;
-        switch (getArguments().getString("tab")) {
-            case "0":
-                activity.setStatus(Color.RED);
-                break;
-            case "1":
-                activity.setStatus(Color.GREEN);
-                break;
-            case "2":
-                activity.setStatus(Color.YELLOW);
-                break;
-            case "3":
-                activity.setStatus(Color.BLUE);
-                break;
-        }
     }
 
     @Override
-    protected void onFragmentVisibleChange(boolean isVisible) {
-        super.onFragmentVisibleChange(isVisible);
-        setStatusbar();
+    protected void onVisible() {
+        super.onVisible();
+        Logger.e("第" + getArguments().getString("tab") + "个显示了");
     }
 
     @OnClick(R.id.text)

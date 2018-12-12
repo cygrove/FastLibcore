@@ -3,7 +3,6 @@ package com.cygrove.libcore.register.persenter;
 import android.support.v4.app.FragmentActivity;
 
 import com.cygrove.libcore.R;
-import com.cygrove.libcore.register.HousingEstate;
 import com.cygrove.libcore.register.VersionInfo;
 import com.cygrove.libcore.register.api.CheckNewVersion;
 import com.cygrove.libcore.register.api.LoginApi;
@@ -11,17 +10,16 @@ import com.cygrove.libcore.register.api.RegisterApi;
 import com.cygrove.libcore.register.contract.Contract;
 import com.cygrove.libcore.register.moudule.LoginMoudule;
 import com.google.gson.JsonObject;
-import com.xiongms.libcore.BaseApplication;
-import com.xiongms.libcore.bean.BaseBean;
-import com.xiongms.libcore.mvp.BasePresenter;
-import com.xiongms.libcore.network.rx.RxResultHelper;
-import com.xiongms.libcore.network.rx.RxResultSubscriber;
-import com.xiongms.libcore.secret.SecretUtil;
-import com.xiongms.libcore.updateversion.CheckUpdateOption;
-import com.xiongms.libcore.updateversion.Q;
-import com.xiongms.libcore.utils.AppPreferencesHelper;
-import com.xiongms.libcore.utils.FileUtil;
-import com.xiongms.libcore.utils.ResourcesUtil;
+import com.cygrove.libcore.bean.BaseBean;
+import com.cygrove.libcore.mvp.BasePresenter;
+import com.cygrove.libcore.network.rx.RxResultHelper;
+import com.cygrove.libcore.network.rx.RxResultSubscriber;
+import com.cygrove.libcore.secret.SecretUtil;
+import com.cygrove.libcore.updateversion.CheckUpdateOption;
+import com.cygrove.libcore.updateversion.Q;
+import com.cygrove.libcore.utils.AppPreferencesHelper;
+import com.cygrove.libcore.utils.FileUtil;
+import com.cygrove.libcore.utils.ResourcesUtil;
 
 import javax.inject.Inject;
 

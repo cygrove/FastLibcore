@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xiongms.libcore">
+    package="com.cygrove.libcore">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <!--android.permission.FLASHLIGHT允许访问闪光灯的权限-->
@@ -43,7 +43,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+                android:resource="@xml/filepaths" />
         </provider>
     </application>
 </manifest>

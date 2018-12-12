@@ -1,9 +1,9 @@
 package com.cygrove.libcore.register.moudule;
 
 import com.cygrove.libcore.register.RegisterActivity;
-import com.xiongms.libcore.di.component.BaseActivityComponent;
-import com.xiongms.libcore.di.module.DefaultActivityModule;
-import com.xiongms.libcore.di.scope.ActivityScope;
+import com.cygrove.libcore.di.component.BaseActivityComponent;
+import com.cygrove.libcore.di.module.DefaultActivityModule;
+import com.cygrove.libcore.di.scope.ActivityScope;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

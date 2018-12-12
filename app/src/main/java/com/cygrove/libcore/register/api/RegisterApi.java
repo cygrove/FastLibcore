@@ -1,7 +1,7 @@
 package com.cygrove.libcore.register.api;
 
 import com.cygrove.libcore.register.HousingEstate;
-import com.xiongms.libcore.bean.BaseBean;
+import com.cygrove.libcore.bean.BaseBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
