@@ -81,12 +81,13 @@ public class HomepageActivity extends BaseMVPActivity<HomepagePersenter> impleme
         fragmentList.add(new HomepageFragment());
         iViewpagerAdapter viewpagerAdapter = new iViewpagerAdapter(getSupportFragmentManager());
         viewpager.setAdapter(viewpagerAdapter);
-        viewpager.setOffscreenPageLimit(0);
+        viewpager.setOffscreenPageLimit(4);
     }
 
     private void tabChanged(int index) {
         mPresenter.tabChanage(index);
         viewpager.setCurrentItem(index);
+        throw new RuntimeException("changedException");
     }
 
     public void setStatus(int color) {

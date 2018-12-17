@@ -9,6 +9,7 @@ import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.cygrove.libcore.utils.AppUtil;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
@@ -19,12 +20,13 @@ import com.cygrove.libcore.config.AppConfig;
 import com.cygrove.libcore.env.Environment;
 import com.cygrove.libcore.glide.GlideLoader;
 import com.cygrove.libcore.utils.AppPreferencesHelper;
-import com.cygrove.libcore.utils.CrashUtil;
 import com.cygrove.libcore.utils.FileUtil;
 import com.cygrove.libcore.utils.LoadViewHelper;
 import com.cygrove.libcore.utils.ResourcesUtil;
 import com.cygrove.libcore.utils.ToastUtil;
 import com.cygrove.widget.GifHeader;
+import com.singhajit.sherlock.core.Sherlock;
+import com.singhajit.sherlock.core.investigation.AppInfo;
 
 import javax.inject.Inject;
 
@@ -93,7 +95,14 @@ public abstract class BaseApplication extends Application implements HasActivity
         registerActivityLifecycleCallbacks();
         FileUtil.createDefaultDir();
         ToastUtil.init(this);
-        CrashUtil.getInstance().setCustomCrashInfo(this);
+        initSherlock();
+    }
+
+    private void initSherlock() {
+        Sherlock.init(this); //Initializing Sherlock
+        Sherlock.setAppInfoProvider(() -> new AppInfo.Builder()
+                .with("Version", AppUtil.getAppVersionName(this)) //You can get the actual version using "AppInfoUtil.getAppVersion(context)"
+                .build());
     }
 
     public Environment getEnv() {

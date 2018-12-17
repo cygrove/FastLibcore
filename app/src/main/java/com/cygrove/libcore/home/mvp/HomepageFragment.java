@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cygrove.libcore.R;
-import com.cygrove.libcore.qrcode.mvp.ScanActivity;
 import com.cygrove.libcore.base.BaseFragment;
 import com.cygrove.libcore.dialog.MessageDialogBuilder;
+import com.cygrove.libcore.qrcode.mvp.ScanActivity;
 import com.cygrove.widget.PickerHelper;
 import com.orhanobut.logger.Logger;
 
@@ -37,10 +37,25 @@ public class HomepageFragment extends BaseFragment implements Contract.View {
         text.setText(getArguments().getString("tab"));
     }
 
+
     @Override
     protected void onVisible() {
         super.onVisible();
-        Logger.e("第" + getArguments().getString("tab") + "个显示了");
+        Logger.e("第" + getArguments().getString("tab") + "个  onVisible");
+    }
+
+    @Override
+    public void lazyLoad() {
+        super.lazyLoad();
+        Logger.e("第" + getArguments().getString("tab") + "个  lazyLoad");
+        setStatusbar();
+    }
+
+    @Override
+    public void lazyLoaded() {
+        super.lazyLoaded();
+        Logger.e("第" + getArguments().getString("tab") + "个  lazyLoaded");
+        setStatusbar();
     }
 
     @OnClick(R.id.text)
@@ -81,6 +96,24 @@ public class HomepageFragment extends BaseFragment implements Contract.View {
                         showToast(options1 + options2 + options3);
                     }
                 });
+                break;
+        }
+    }
+
+    private void setStatusbar() {
+        HomepageActivity activity = (HomepageActivity) mActivity;
+        switch (getArguments().getString("tab")) {
+            case "0":
+                activity.setStatus(Color.RED);
+                break;
+            case "1":
+                activity.setStatus(Color.GREEN);
+                break;
+            case "2":
+                activity.setStatus(Color.YELLOW);
+                break;
+            case "3":
+                activity.setStatus(Color.BLUE);
                 break;
         }
     }

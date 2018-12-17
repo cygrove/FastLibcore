@@ -25,6 +25,8 @@ public abstract class BaseFragment extends RxFragment implements IView {
     private Unbinder mUnbinder;
     protected Activity mActivity;
     protected Context mContext;
+    private boolean mLazyLoad;
+    private boolean mIsNeedLazyLoad;
 
     /**
      * rootView是否初始化标志，防止回调函数在rootView为空的时候触发
@@ -34,7 +36,7 @@ public abstract class BaseFragment extends RxFragment implements IView {
     /**
      * 当前Fragment是否处于可见状态标志，防止因ViewPager的缓存机制而导致回调函数的触发
      */
-    private boolean isFragmentVisible;
+    public boolean isFragmentVisible;
 
     @Override
     public void onAttach(Activity activity) {
@@ -64,6 +66,14 @@ public abstract class BaseFragment extends RxFragment implements IView {
             }
             initData(savedInstanceState);
         }
+        if (mIsNeedLazyLoad) {
+            if (!mLazyLoad) {
+                mLazyLoad = true;
+                lazyLoad();
+            } else {
+                lazyLoaded();
+            }
+        }
         return mRootView;
     }
 
@@ -87,6 +97,9 @@ public abstract class BaseFragment extends RxFragment implements IView {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+//        if (mRootView == null) {
+//            return;
+//        }
         hasCreateView = true;
         if (isVisibleToUser) {
             onFragmentVisibleChange(true);
@@ -98,6 +111,19 @@ public abstract class BaseFragment extends RxFragment implements IView {
             isFragmentVisible = false;
         }
     }
+
+    /**
+     * 延迟加载
+     */
+    public void lazyLoad() {
+    }
+
+    /**
+     * 延迟加载成功之后再次切换到该页面时会调用该方法
+     */
+    public void lazyLoaded() {
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -135,6 +161,16 @@ public abstract class BaseFragment extends RxFragment implements IView {
      * 可见
      */
     protected void onVisible() {
+        if (hasCreateView && mRootView != null) {
+            if (!mLazyLoad) {
+                mLazyLoad = true;
+                lazyLoad();
+            } else {
+                lazyLoaded();
+            }
+        } else {
+            mIsNeedLazyLoad = true;
+        }
     }
 
     /**
